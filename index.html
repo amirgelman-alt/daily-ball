@@ -15,388 +15,126 @@
     --card-bg: #ffffff;
     --border: #d4cfc5;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Space Mono', monospace; font-size: 13px; line-height: 1.5; min-height: 100vh; }
 
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Space Mono', monospace;
-    font-size: 13px;
-    line-height: 1.5;
-    min-height: 100vh;
-  }
-
-  /* ── API KEY GATE ─────────────────────────────────────────────────────── */
-  .gate-overlay {
-    position: fixed;
-    inset: 0;
-    background: var(--ink);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-  }
-
-  .gate-box {
-    background: #141414;
-    border: 1px solid #2a2a2a;
-    border-top: 4px solid var(--accent);
-    max-width: 480px;
-    width: 100%;
-    padding: 36px 32px 32px;
-  }
-
-  .gate-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 38px;
-    letter-spacing: 3px;
-    color: #fff;
-    margin-bottom: 4px;
-  }
+  /* GATE */
+  .gate-overlay { position: fixed; inset: 0; background: var(--ink); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .gate-box { background: #141414; border: 1px solid #2a2a2a; border-top: 4px solid var(--accent); max-width: 480px; width: 100%; padding: 36px 32px 32px; }
+  .gate-logo { font-family: 'Bebas Neue', sans-serif; font-size: 38px; letter-spacing: 3px; color: #fff; margin-bottom: 4px; }
   .gate-logo span { color: var(--accent); }
-
-  .gate-subtitle {
-    font-size: 9px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #555;
-    margin-bottom: 28px;
-  }
-
-  .gate-label {
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #666;
-    margin-bottom: 8px;
-    display: block;
-  }
-
-  .gate-input {
-    width: 100%;
-    background: #0d0d0d;
-    border: 1px solid #333;
-    color: #fff;
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    padding: 10px 14px;
-    outline: none;
-    margin-bottom: 10px;
-    transition: border-color 0.15s;
-    letter-spacing: 0.5px;
-  }
+  .gate-subtitle { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 28px; }
+  .gate-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #666; margin-bottom: 8px; display: block; }
+  .gate-input { width: 100%; background: #0d0d0d; border: 1px solid #333; color: #fff; font-family: 'Space Mono', monospace; font-size: 12px; padding: 10px 14px; outline: none; margin-bottom: 10px; transition: border-color 0.15s; }
   .gate-input:focus { border-color: var(--accent); }
   .gate-input.error { border-color: #ff4444; }
-
-  .gate-error {
-    font-size: 11px;
-    color: #ff6666;
-    margin-bottom: 10px;
-    display: none;
-  }
+  .gate-error { font-size: 11px; color: #ff6666; margin-bottom: 10px; display: none; }
   .gate-error.show { display: block; }
-
-  .gate-hint {
-    font-size: 10px;
-    color: #444;
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
+  .gate-hint { font-size: 10px; color: #444; margin-bottom: 20px; line-height: 1.6; }
   .gate-hint a { color: #666; }
   .gate-hint a:hover { color: var(--accent); }
-
-  .gate-btn {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    width: 100%;
-    padding: 11px;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
-    letter-spacing: 3px;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
+  .gate-btn { background: var(--accent); color: #fff; border: none; width: 100%; padding: 11px; font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 3px; cursor: pointer; transition: background 0.15s; }
   .gate-btn:hover { background: #c22a00; }
-
-  .gate-privacy {
-    margin-top: 16px;
-    padding: 12px 14px;
-    background: #0d0d0d;
-    border-left: 3px solid #2a2a2a;
-    font-size: 10px;
-    color: #444;
-    line-height: 1.7;
-  }
+  .gate-privacy { margin-top: 16px; padding: 12px 14px; background: #0d0d0d; border-left: 3px solid #2a2a2a; font-size: 10px; color: #444; line-height: 1.7; }
   .gate-privacy strong { color: #666; }
 
-  /* ── KEY STATUS BAR (shown when key is set) ───────────────────────────── */
-  .key-bar {
-    background: #111;
-    padding: 6px 32px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 10px;
-    color: #444;
-    letter-spacing: 1px;
-    border-bottom: 1px solid #1e1e1e;
-  }
-  .key-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: #2a7a2a; flex-shrink: 0;
-  }
+  /* KEY BAR */
+  .key-bar { background: #111; padding: 6px 32px; display: flex; align-items: center; gap: 10px; font-size: 10px; color: #444; letter-spacing: 1px; border-bottom: 1px solid #1e1e1e; }
+  .key-dot { width: 6px; height: 6px; border-radius: 50%; background: #2a7a2a; flex-shrink: 0; }
   .key-bar-text { flex: 1; }
-  .key-change-btn {
-    background: none; border: none; color: #444;
-    font-family: 'Space Mono', monospace; font-size: 10px;
-    cursor: pointer; text-decoration: underline;
-    letter-spacing: 1px; padding: 0;
-    transition: color 0.15s;
-  }
+  .key-change-btn { background: none; border: none; color: #444; font-family: 'Space Mono', monospace; font-size: 10px; cursor: pointer; text-decoration: underline; letter-spacing: 1px; padding: 0; transition: color 0.15s; }
   .key-change-btn:hover { color: var(--accent); }
 
-  /* ── MASTHEAD ─────────────────────────────────────────────────────────── */
-  .masthead {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 18px 32px 14px;
-    border-bottom: 4px solid var(--accent);
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .masthead-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(36px, 6vw, 72px);
-    letter-spacing: 3px;
-    line-height: 1;
-    color: #fff;
-  }
+  /* MASTHEAD */
+  .masthead { background: var(--ink); color: var(--paper); padding: 18px 32px 14px; border-bottom: 4px solid var(--accent); display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .masthead-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 6vw, 72px); letter-spacing: 3px; line-height: 1; color: #fff; }
   .masthead-title span { color: var(--accent); }
   .masthead-meta { font-size: 10px; color: #888; letter-spacing: 2px; text-transform: uppercase; text-align: right; }
   .masthead-meta strong { display: block; font-size: 12px; color: var(--paper); margin-bottom: 2px; }
 
-  /* ── TICKER ───────────────────────────────────────────────────────────── */
-  .ticker-bar {
-    background: var(--accent);
-    color: #fff;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    padding: 5px 0;
-    overflow: hidden;
-    white-space: nowrap;
-  }
+  /* TICKER */
+  .ticker-bar { background: var(--accent); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 1px; padding: 5px 0; overflow: hidden; white-space: nowrap; }
   .ticker-inner { display: inline-block; animation: ticker 55s linear infinite; padding-left: 100%; }
   @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-100%)} }
 
-  /* ── GEN BAR ──────────────────────────────────────────────────────────── */
-  .gen-bar {
-    background: var(--ink);
-    padding: 10px 32px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
+  /* GEN BAR */
+  .gen-bar { background: var(--ink); padding: 10px 32px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
   .gen-bar label { color: #aaa; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
-  .date-select {
-    background: #1a1a1a; border: 1px solid #444; color: #fff;
-    font-family: 'Space Mono', monospace; font-size: 12px;
-    padding: 6px 10px; cursor: pointer; outline: none;
-  }
-
-  .btn-customize {
-    background: none; border: 1px solid #3a3a3a; color: #999;
-    font-family: 'Barlow Condensed', sans-serif; font-size: 14px;
-    font-weight: 700; letter-spacing: 2px; padding: 6px 14px;
-    cursor: pointer; transition: all 0.15s;
-    display: flex; align-items: center; gap: 7px;
-  }
+  .date-select { background: #1a1a1a; border: 1px solid #444; color: #fff; font-family: 'Space Mono', monospace; font-size: 12px; padding: 6px 10px; cursor: pointer; outline: none; }
+  .btn-customize { background: none; border: 1px solid #3a3a3a; color: #999; font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 2px; padding: 6px 14px; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 7px; }
   .btn-customize:hover { border-color: #888; color: #ddd; }
   .btn-customize.open { border-color: var(--accent); color: var(--accent); background: rgba(230,48,0,0.1); }
   .chevron { transition: transform 0.25s; display: inline-block; }
   .btn-customize.open .chevron { transform: rotate(180deg); }
-  .count-badge {
-    background: var(--accent); color: #fff; font-family: 'Space Mono', monospace;
-    font-size: 10px; padding: 1px 7px; border-radius: 10px;
-    min-width: 22px; text-align: center; font-weight: 700;
-  }
-
-  .btn-generate {
-    background: var(--accent); color: #fff; border: none;
-    padding: 8px 22px; font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px; letter-spacing: 2px; cursor: pointer;
-    transition: background 0.15s, transform 0.1s;
-    display: flex; align-items: center; gap: 8px; margin-left: auto;
-  }
+  .count-badge { background: var(--accent); color: #fff; font-family: 'Space Mono', monospace; font-size: 10px; padding: 1px 7px; border-radius: 10px; min-width: 22px; text-align: center; font-weight: 700; }
+  .btn-generate { background: var(--accent); color: #fff; border: none; padding: 8px 22px; font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; cursor: pointer; transition: background 0.15s, transform 0.1s; display: flex; align-items: center; gap: 8px; margin-left: auto; }
   .btn-generate:hover { background: #c22a00; }
   .btn-generate:active { transform: scale(0.97); }
   .btn-generate:disabled { background: #555; cursor: not-allowed; }
-  .spinner {
-    width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3);
-    border-top-color: #fff; border-radius: 50%;
-    animation: spin 0.7s linear infinite; display: none;
-  }
+  .spinner { width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; display: none; }
   .btn-generate.loading .spinner { display: block; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ── SELECTOR PANEL ───────────────────────────────────────────────────── */
-  .selector-panel {
-    background: #131313;
-    border-bottom: 2px solid #252525;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.38s cubic-bezier(0.4,0,0.2,1);
-  }
+  /* SELECTOR */
+  .selector-panel { background: #131313; border-bottom: 2px solid #252525; max-height: 0; overflow: hidden; transition: max-height 0.38s cubic-bezier(0.4,0,0.2,1); }
   .selector-panel.open { max-height: 600px; }
-  .selector-inner {
-    padding: 20px 32px 24px;
-    opacity: 0;
-    transition: opacity 0.2s 0.12s;
-  }
+  .selector-inner { padding: 20px 32px 24px; opacity: 0; transition: opacity 0.2s 0.12s; }
   .selector-panel.open .selector-inner { opacity: 1; }
-  .selector-top {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 18px; flex-wrap: wrap; gap: 10px;
-  }
-  .selector-label {
-    font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
-    font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #666;
-  }
+  .selector-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
+  .selector-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #666; }
   .selector-label span { color: var(--accent); }
   .quick-btns { display: flex; gap: 8px; }
-  .quick-btn {
-    background: none; border: 1px solid #333; color: #666;
-    font-family: 'Space Mono', monospace; font-size: 9px;
-    letter-spacing: 1px; padding: 4px 10px; cursor: pointer;
-    text-transform: uppercase; transition: all 0.15s;
-  }
+  .quick-btn { background: none; border: 1px solid #333; color: #666; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; padding: 4px 10px; cursor: pointer; text-transform: uppercase; transition: all 0.15s; }
   .quick-btn:hover { border-color: var(--accent); color: var(--accent); }
   .sport-groups { display: flex; flex-direction: column; gap: 14px; }
   .sport-group { display: flex; align-items: flex-start; gap: 14px; }
-  .sport-label {
-    font-family: 'Barlow Condensed', sans-serif; font-size: 9px;
-    font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-    color: #444; width: 72px; flex-shrink: 0; padding-top: 6px;
-    border-top: 1px solid #222;
-  }
+  .sport-label { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #444; width: 72px; flex-shrink: 0; padding-top: 6px; border-top: 1px solid #222; }
   .chip-row { display: flex; flex-wrap: wrap; gap: 7px; flex: 1; }
-  .chip {
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 4px 12px 4px 9px; border: 1px solid #2a2a2a;
-    cursor: pointer; font-family: 'Barlow Condensed', sans-serif;
-    font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
-    color: #555; background: #1a1a1a;
-    transition: all 0.15s; user-select: none;
-  }
+  .chip { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px 4px 9px; border: 1px solid #2a2a2a; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; color: #555; background: #1a1a1a; transition: all 0.15s; user-select: none; }
   .chip:hover { border-color: #555; color: #bbb; }
   .chip.on { border-color: var(--accent); color: #fff; background: #1f0800; }
-  .chip-pip {
-    width: 5px; height: 5px; border-radius: 50%;
-    background: #333; flex-shrink: 0; transition: background 0.15s;
-  }
+  .chip-pip { width: 5px; height: 5px; border-radius: 50%; background: #333; flex-shrink: 0; transition: background 0.15s; }
   .chip.on .chip-pip { background: var(--accent); }
 
-  /* ── CONTENT ──────────────────────────────────────────────────────────── */
+  /* CONTENT */
   .content-area { max-width: 1140px; margin: 0 auto; padding: 28px 20px 60px; }
-
   .idle-state { text-align: center; padding: 70px 20px; color: var(--muted); }
   .idle-state .icon { font-size: 54px; display: block; margin-bottom: 18px; }
-  .idle-state h2 {
-    font-family: 'Bebas Neue', sans-serif; font-size: 30px;
-    color: var(--ink); letter-spacing: 2px; margin-bottom: 8px;
-  }
+  .idle-state h2 { font-family: 'Bebas Neue', sans-serif; font-size: 30px; color: var(--ink); letter-spacing: 2px; margin-bottom: 8px; }
   .idle-state p { font-size: 12px; }
-
   .loading-overlay { text-align: center; padding: 70px 20px; }
-  .loading-pulse {
-    font-family: 'Bebas Neue', sans-serif; font-size: 32px;
-    letter-spacing: 4px; color: var(--muted);
-    animation: pulse 1.2s ease-in-out infinite;
-  }
+  .loading-pulse { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 4px; color: var(--muted); animation: pulse 1.2s ease-in-out infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
   .loading-sub { font-size: 11px; color: var(--muted); margin-top: 10px; letter-spacing: 1px; }
-
-  .date-header {
-    font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
-    font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--muted); border-bottom: 1px solid var(--border);
-    padding-bottom: 6px; margin-bottom: 22px;
-  }
-
-  .leagues-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 16px;
-  }
-
-  .league-card {
-    background: var(--card-bg); border: 1px solid var(--border);
-    border-top: 3px solid var(--ink); overflow: hidden;
-    transition: box-shadow 0.15s;
-  }
+  .date-header { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--border); padding-bottom: 6px; margin-bottom: 22px; }
+  .leagues-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+  .league-card { background: var(--card-bg); border: 1px solid var(--border); border-top: 3px solid var(--ink); overflow: hidden; transition: box-shadow 0.15s; }
   .league-card:hover { box-shadow: 4px 4px 0 var(--ink); }
   .league-card.full-width { grid-column: 1 / -1; border-top-color: #007a7a; }
-
-  .card-head {
-    background: var(--ink); color: #fff; padding: 8px 14px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
+  .card-head { background: var(--ink); color: #fff; padding: 8px 14px; display: flex; align-items: center; justify-content: space-between; }
   .card-head.red    { background: var(--accent); }
   .card-head.blue   { background: var(--accent2); }
   .card-head.green  { background: #1a7a1a; }
   .card-head.purple { background: #5a0080; }
   .card-head.orange { background: #b85500; }
   .card-head.teal   { background: #007a7a; }
-
   .league-name-label { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; }
   .card-body { padding: 14px; }
-
-  .bullet {
-    display: flex; gap: 10px; margin-bottom: 12px;
-    padding-bottom: 12px; border-bottom: 1px dashed var(--border);
-  }
+  .bullet { display: flex; gap: 10px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dashed var(--border); }
   .bullet:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
-  .b-icon {
-    flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; margin-top: 1px;
-  }
+  .b-icon { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; margin-top: 1px; }
   .b-icon.sc { background: #e8f0ff; }
   .b-icon.pf { background: #fff0e8; }
   .b-icon.st { background: #e8ffe8; }
   .b-icon.nw { background: #f0e8ff; }
   .b-icon.wt { background: #fff8d0; }
-
   .b-text { flex: 1; font-size: 12px; line-height: 1.55; color: #222; }
-  .b-label {
-    display: block; font-size: 9px; font-weight: 700;
-    letter-spacing: 2px; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 3px;
-  }
-  .watch-btn {
-    display: inline-flex; align-items: center; gap: 5px;
-    text-decoration: none; padding: 4px 10px;
-    font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
-    font-weight: 700; letter-spacing: 1px; margin-top: 5px;
-    transition: opacity 0.15s; color: #fff;
-  }
+  .b-label { display: block; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+  .watch-btn { display: inline-flex; align-items: center; gap: 5px; text-decoration: none; padding: 4px 10px; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-top: 5px; transition: opacity 0.15s; color: #fff; }
   .watch-btn:hover { opacity: 0.8; }
   .watch-btn.yt { background: #cc0000; }
   .watch-btn.xp { background: #000; }
-
-  .error-box {
-    background: #fff5f5; border: 1px solid #faa;
-    border-left: 4px solid var(--accent);
-    padding: 16px; font-size: 12px; color: #800;
-  }
+  .error-box { background: #fff5f5; border: 1px solid #faa; border-left: 4px solid var(--accent); padding: 16px; font-size: 12px; color: #800; }
 
   @media (max-width: 600px) {
     .masthead { padding: 14px 16px; }
@@ -413,90 +151,69 @@
 </head>
 <body>
 
-<!-- ── API KEY GATE ─────────────────────────────────────────────────────── -->
+<!-- GATE -->
 <div class="gate-overlay" id="gate">
   <div class="gate-box">
     <div class="gate-logo">THE DAILY <span>BALL</span></div>
     <div class="gate-subtitle">Sports Intelligence Brief</div>
-
     <label class="gate-label" for="gate-key-input">Your Anthropic API Key</label>
-    <input
-      class="gate-input"
-      id="gate-key-input"
-      type="password"
-      placeholder="sk-ant-api03-..."
-      autocomplete="off"
-      onkeydown="if(event.key==='Enter') saveKey()"
-    >
-    <div class="gate-error" id="gate-error">That doesn't look like a valid key. It should start with <strong>sk-ant-</strong></div>
-
+    <input class="gate-input" id="gate-key-input" type="password" placeholder="sk-ant-api03-..." autocomplete="off" onkeydown="if(event.key==='Enter') saveKey()">
+    <div class="gate-error" id="gate-error">That does not look like a valid key. It should start with sk-ant-</div>
     <div class="gate-hint">
-      Don't have a key? Get one free at
-      <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>
-      → API Keys → Create Key.<br>
-      You'll need to add a small credit (e.g. $5). Each recap costs ~$0.01.
+      Get a key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> -> API Keys -> Create Key.<br>
+      Add a small credit (e.g. $5). Each recap costs about $0.02.
     </div>
-
     <button class="gate-btn" onclick="saveKey()">ENTER THE DAILY BALL</button>
-
     <div class="gate-privacy">
-      <strong>🔒 Your key stays on your device.</strong><br>
-      It's saved only in your browser's local storage — never sent to any server other than Anthropic directly. Nobody else can see it.
+      <strong>Your key stays on your device.</strong><br>
+      Saved only in your browser local storage. Never sent to any server other than Anthropic directly.
     </div>
   </div>
 </div>
 
-<!-- ── MAIN APP ─────────────────────────────────────────────────────────── -->
+<!-- APP -->
 <div id="app" style="display:none;">
-
   <div class="masthead">
     <div>
       <div class="masthead-title">THE DAILY <span>BALL</span></div>
       <div style="font-size:10px;color:#666;letter-spacing:2px;margin-top:3px;">SPORTS INTELLIGENCE BRIEF</div>
     </div>
     <div class="masthead-meta">
-      <strong id="today-display">—</strong>
+      <strong id="today-display">-</strong>
       <span>WHAT YOU NEED TO KNOW</span>
     </div>
   </div>
 
   <div class="ticker-bar">
     <span class="ticker-inner">
-      ⚡ NBA · OKC #1 West 51-15 · SAS #2 West 48-17 · BOS upset by SAS · UCL · Real Madrid 3-0 Man City · PSG 5-2 Chelsea · Bayern 6-1 Atalanta · Atletico 5-2 Tottenham · Bodo/Glimt 3-0 Sporting · NCAAMB · Conference Tourneys · Selection Sunday Mar 15 · NFL Free Agency opens · F1 Australian GP this weekend &nbsp;&nbsp;&nbsp;
+      NBA - OKC 51-15 - SAS 48-17 - BOS upset by SAS - UCL - Real Madrid 3-0 Man City - PSG 5-2 Chelsea - Bayern 6-1 Atalanta - Atletico 5-2 Tottenham - Bodo/Glimt 3-0 Sporting - NCAAMB - Conference Tourneys - Selection Sunday Mar 15 - NFL Free Agency opens - F1 Australian GP this weekend
     </span>
   </div>
 
-  <!-- KEY STATUS BAR -->
   <div class="key-bar">
     <div class="key-dot"></div>
     <div class="key-bar-text" id="key-bar-text">API key active</div>
     <button class="key-change-btn" onclick="changeKey()">change key</button>
   </div>
 
-  <!-- CONTROLS -->
   <div class="gen-bar">
     <label>EDITION DATE</label>
     <input type="date" class="date-select" id="date-input">
-
     <button class="btn-customize" id="customize-btn" onclick="togglePanel()">
-      <span class="chevron">▾</span>
+      <span class="chevron">v</span>
       LEAGUES
-      <span class="count-badge" id="count-badge">—</span>
+      <span class="count-badge" id="count-badge">-</span>
     </button>
-
     <button class="btn-generate" id="gen-btn" onclick="generateRecap()">
       <span class="spinner"></span>
       <span id="gen-label">GENERATE TODAY'S BRIEF</span>
     </button>
   </div>
 
-  <!-- LEAGUE SELECTOR PANEL -->
   <div class="selector-panel" id="selector-panel">
     <div class="selector-inner">
       <div class="selector-top">
-        <div class="selector-label">
-          ⚙ PICK YOUR LEAGUES — <span>only active leagues appear in your brief</span>
-        </div>
+        <div class="selector-label">PICK YOUR LEAGUES - <span>only active leagues appear in your brief</span></div>
         <div class="quick-btns">
           <button class="quick-btn" onclick="selectAll()">ALL</button>
           <button class="quick-btn" onclick="selectNone()">NONE</button>
@@ -507,7 +224,6 @@
     </div>
   </div>
 
-  <!-- CONTENT -->
   <div class="content-area">
     <div class="idle-state" id="idle-state">
       <span class="icon">📰</span>
@@ -516,29 +232,23 @@
     </div>
     <div id="main-output" style="display:none;"></div>
   </div>
-
-</div><!-- end #app -->
+</div>
 
 <script>
-// ── API KEY MANAGEMENT ────────────────────────────────────────────────────
-const KEY_STORAGE = 'tdb_api_key';
+// KEY MANAGEMENT
+var KEY_STORAGE = 'tdb_api_key';
 
-function getKey() {
-  return localStorage.getItem(KEY_STORAGE) || '';
-}
+function getKey() { return localStorage.getItem(KEY_STORAGE) || ''; }
 
 function saveKey() {
-  const input = document.getElementById('gate-key-input');
-  const error = document.getElementById('gate-error');
-  const val   = input.value.trim();
-
-  // Basic validation
+  var input = document.getElementById('gate-key-input');
+  var error = document.getElementById('gate-error');
+  var val = input.value.trim();
   if (!val.startsWith('sk-ant-')) {
     input.classList.add('error');
     error.classList.add('show');
     return;
   }
-
   input.classList.remove('error');
   error.classList.remove('show');
   localStorage.setItem(KEY_STORAGE, val);
@@ -549,110 +259,101 @@ function changeKey() {
   localStorage.removeItem(KEY_STORAGE);
   document.getElementById('gate-key-input').value = '';
   document.getElementById('gate').style.display = 'flex';
-  document.getElementById('app').style.display  = 'none';
+  document.getElementById('app').style.display = 'none';
 }
 
 function showApp() {
   document.getElementById('gate').style.display = 'none';
-  document.getElementById('app').style.display  = 'block';
-
-  // Show masked key in status bar
-  const key = getKey();
-  const masked = key.slice(0,10) + '••••••••••••' + key.slice(-4);
-  document.getElementById('key-bar-text').textContent = `API key active — ${masked}`;
+  document.getElementById('app').style.display = 'block';
+  var key = getKey();
+  var masked = key.slice(0,10) + '............' + key.slice(-4);
+  document.getElementById('key-bar-text').textContent = 'API key active - ' + masked;
 }
 
-// On load: check if key already saved
-window.addEventListener('DOMContentLoaded', () => {
-  if (getKey()) {
-    showApp();
-  }
+window.addEventListener('DOMContentLoaded', function() {
+  if (getKey()) showApp();
 });
 
-// ── DATE ──────────────────────────────────────────────────────────────────
-const today = new Date();
+// DATE
+var today = new Date();
 document.getElementById('date-input').value = today.toISOString().split('T')[0];
-document.getElementById('today-display').textContent = today.toLocaleDateString('en-US',{
-  weekday:'long',year:'numeric',month:'long',day:'numeric'
+document.getElementById('today-display').textContent = today.toLocaleDateString('en-US', {
+  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
 });
 
-// ── LEAGUE CATALOG ────────────────────────────────────────────────────────
-const LEAGUES = [
-  {id:'nba',       name:'NBA',                  emoji:'🏀', sport:'BASKETBALL',   on:true },
-  {id:'ncaamb',    name:'College Basketball',   emoji:'🏀', sport:'BASKETBALL',   on:true },
-  {id:'euroleague',name:'EuroLeague',           emoji:'🏀', sport:'BASKETBALL',   on:true },
-  {id:'il_bball',  name:'Israeli Basketball',   emoji:'🏀', sport:'BASKETBALL',   on:false},
-  {id:'fiba',      name:'FIBA / MondoBaskt',    emoji:'🏀', sport:'BASKETBALL',   on:false},
-  {id:'epl',       name:'EPL',                  emoji:'⚽', sport:'SOCCER',       on:true },
-  {id:'ucl',       name:'UEFA Champions League',emoji:'⚽', sport:'SOCCER',       on:true },
-  {id:'laliga',    name:'La Liga',              emoji:'⚽', sport:'SOCCER',       on:false},
-  {id:'wc_qual',   name:'World Cup Qualifiers', emoji:'⚽', sport:'SOCCER',       on:true },
-  {id:'euro_qual', name:'Euro Qualifiers',      emoji:'⚽', sport:'SOCCER',       on:true },
-  {id:'il_soccer', name:'Israeli Soccer',       emoji:'⚽', sport:'SOCCER',       on:false},
-  {id:'mls',       name:'MLS',                  emoji:'⚽', sport:'SOCCER',       on:false},
-  {id:'nfl',       name:'NFL',                  emoji:'🏈', sport:'AM. FOOTBALL', on:true },
-  {id:'ncaafb',    name:'College Football',     emoji:'🏈', sport:'AM. FOOTBALL', on:true },
-  {id:'mlb',       name:'MLB',                  emoji:'⚾', sport:'BASEBALL',     on:false},
-  {id:'nhl',       name:'NHL',                  emoji:'🏒', sport:'HOCKEY',       on:false},
-  {id:'f1',        name:'Formula 1',            emoji:'🏎️', sport:'RACING',       on:true },
-  {id:'tennis',    name:'Tennis',               emoji:'🎾', sport:'OTHER',        on:false},
-  {id:'golf',      name:'Golf / PGA',           emoji:'⛳', sport:'OTHER',        on:false},
-  {id:'ufc',       name:'UFC / MMA',            emoji:'🥊', sport:'OTHER',        on:false},
+// LEAGUES
+var LEAGUES = [
+  {id:'nba',        name:'NBA',                   emoji:'🏀', sport:'BASKETBALL',   on:true},
+  {id:'ncaamb',     name:'College Basketball',    emoji:'🏀', sport:'BASKETBALL',   on:true},
+  {id:'euroleague', name:'EuroLeague',            emoji:'🏀', sport:'BASKETBALL',   on:true},
+  {id:'il_bball',   name:'Israeli Basketball',    emoji:'🏀', sport:'BASKETBALL',   on:false},
+  {id:'fiba',       name:'FIBA / MondoBaskt',     emoji:'🏀', sport:'BASKETBALL',   on:false},
+  {id:'epl',        name:'EPL',                   emoji:'⚽', sport:'SOCCER',       on:true},
+  {id:'ucl',        name:'UEFA Champions League', emoji:'⚽', sport:'SOCCER',       on:true},
+  {id:'laliga',     name:'La Liga',               emoji:'⚽', sport:'SOCCER',       on:false},
+  {id:'wc_qual',    name:'World Cup Qualifiers',  emoji:'⚽', sport:'SOCCER',       on:true},
+  {id:'euro_qual',  name:'Euro Qualifiers',       emoji:'⚽', sport:'SOCCER',       on:true},
+  {id:'il_soccer',  name:'Israeli Soccer',        emoji:'⚽', sport:'SOCCER',       on:false},
+  {id:'mls',        name:'MLS',                   emoji:'⚽', sport:'SOCCER',       on:false},
+  {id:'nfl',        name:'NFL',                   emoji:'🏈', sport:'AM. FOOTBALL', on:true},
+  {id:'ncaafb',     name:'College Football',      emoji:'🏈', sport:'AM. FOOTBALL', on:true},
+  {id:'mlb',        name:'MLB',                   emoji:'⚾', sport:'BASEBALL',     on:false},
+  {id:'nhl',        name:'NHL',                   emoji:'🏒', sport:'HOCKEY',       on:false},
+  {id:'f1',         name:'Formula 1',             emoji:'🏎', sport:'RACING',       on:true},
+  {id:'tennis',     name:'Tennis',                emoji:'🎾', sport:'OTHER',        on:false},
+  {id:'golf',       name:'Golf / PGA',            emoji:'⛳', sport:'OTHER',        on:false},
+  {id:'ufc',        name:'UFC / MMA',             emoji:'🥊', sport:'OTHER',        on:false}
 ];
 
-const active = {};
-LEAGUES.forEach(l => active[l.id] = l.on);
+var active = {};
+LEAGUES.forEach(function(l) { active[l.id] = l.on; });
 
 function buildSelector() {
-  const container = document.getElementById('sport-groups');
-  const sports = [...new Set(LEAGUES.map(l => l.sport))];
-  container.innerHTML = sports.map(sport => {
-    const group = LEAGUES.filter(l => l.sport === sport);
-    const chips = group.map(l =>
-      `<div class="chip ${active[l.id]?'on':''}" id="chip-${l.id}" onclick="toggle('${l.id}')">
-        <span class="chip-pip"></span>${l.emoji} ${l.name}
-      </div>`
-    ).join('');
-    return `<div class="sport-group">
-      <div class="sport-label">${sport}</div>
-      <div class="chip-row">${chips}</div>
-    </div>`;
+  var container = document.getElementById('sport-groups');
+  var sports = [];
+  LEAGUES.forEach(function(l) { if (sports.indexOf(l.sport) === -1) sports.push(l.sport); });
+  container.innerHTML = sports.map(function(sport) {
+    var group = LEAGUES.filter(function(l) { return l.sport === sport; });
+    var chips = group.map(function(l) {
+      return '<div class="chip ' + (active[l.id] ? 'on' : '') + '" id="chip-' + l.id + '" onclick="toggle(\'' + l.id + '\')">' +
+        '<span class="chip-pip"></span>' + l.emoji + ' ' + l.name + '</div>';
+    }).join('');
+    return '<div class="sport-group"><div class="sport-label">' + sport + '</div><div class="chip-row">' + chips + '</div></div>';
   }).join('');
   refreshCount();
 }
 
 function toggle(id) {
   active[id] = !active[id];
-  const chip = document.getElementById('chip-'+id);
-  if (chip) chip.className = 'chip' + (active[id]?' on':'');
+  var chip = document.getElementById('chip-' + id);
+  if (chip) chip.className = 'chip' + (active[id] ? ' on' : '');
   refreshCount();
 }
 
 function refreshCount() {
-  document.getElementById('count-badge').textContent =
-    Object.values(active).filter(Boolean).length;
+  var n = Object.values(active).filter(Boolean).length;
+  document.getElementById('count-badge').textContent = n;
 }
 
-function selectAll()     { LEAGUES.forEach(l=>{active[l.id]=true;  refreshChip(l.id);}); refreshCount(); }
-function selectNone()    { LEAGUES.forEach(l=>{active[l.id]=false; refreshChip(l.id);}); refreshCount(); }
-function resetDefaults() { LEAGUES.forEach(l=>{active[l.id]=l.on;  refreshChip(l.id);}); refreshCount(); }
+function selectAll()     { LEAGUES.forEach(function(l) { active[l.id]=true;  refreshChip(l.id); }); refreshCount(); }
+function selectNone()    { LEAGUES.forEach(function(l) { active[l.id]=false; refreshChip(l.id); }); refreshCount(); }
+function resetDefaults() { LEAGUES.forEach(function(l) { active[l.id]=l.on;  refreshChip(l.id); }); refreshCount(); }
 
 function refreshChip(id) {
-  const c = document.getElementById('chip-'+id);
-  if (c) c.className = 'chip'+(active[id]?' on':'');
+  var c = document.getElementById('chip-' + id);
+  if (c) c.className = 'chip' + (active[id] ? ' on' : '');
 }
 
 function togglePanel() {
-  const panel = document.getElementById('selector-panel');
-  const btn   = document.getElementById('customize-btn');
-  const isOpen = panel.classList.toggle('open');
+  var panel = document.getElementById('selector-panel');
+  var btn = document.getElementById('customize-btn');
+  var isOpen = panel.classList.toggle('open');
   btn.classList.toggle('open', isOpen);
 }
 
 buildSelector();
 
-// ── COLORS ────────────────────────────────────────────────────────────────
-const COLORS = {
+var COLORS = {
   'NBA':'red','College Basketball':'purple','EuroLeague':'orange',
   'Israeli Basketball':'blue','FIBA / MondoBaskt':'orange',
   'EPL':'green','UEFA Champions League':'blue','La Liga':'blue',
@@ -660,52 +361,26 @@ const COLORS = {
   'Israeli Soccer':'blue','MLS':'green',
   'NFL':'blue','College Football':'green',
   'MLB':'red','NHL':'blue','Formula 1':'red',
-  'Tennis':'green','Golf / PGA':'green','UFC / MMA':'red',
+  'Tennis':'green','Golf / PGA':'green','UFC / MMA':'red'
 };
 
-// ── SPORTS DATA ───────────────────────────────────────────────────────────
-const DATA_CTX = `
-LIVE DATA — MARCH 12, 2026:
+var DATA_CTX = "LIVE DATA - MARCH 12, 2026:\n" +
+"NBA (last 24h): Orlando 128 Cleveland 122. NYK 134 Utah 117. LAL 120 Minnesota 106. SAS 125 BOS 116 - MAJOR UPSET Celtics fall in San Antonio. CHI 130 GSW 124 Bulls stun Warriors. HOU 113 TOR 99. NOP 122 TOR 111. SAC 114 IND 109.\n" +
+"NBA Standings West: OKC 51-15 number 1, SAS 48-17 number 2, LAL 40-25, HOU 40-24. East: DET 46-18 number 1, BOS 43-22 number 2, NYK 42-25.\n" +
+"UEFA CHAMPIONS LEAGUE R16 1st legs: Real Madrid 3-0 Man City. PSG 5-2 Chelsea. Bodo/Glimt 3-0 Sporting CP - UPSET. Bayern Munich 6-1 Atalanta. Atletico Madrid 5-2 Tottenham. Arsenal 1-1 Leverkusen. Newcastle 1-1 Barcelona. Galatasaray 1-0 Liverpool - UPSET.\n" +
+"EPL last matchday Mar 3-5: Chelsea 4-1 Aston Villa. Newcastle 2-1 Man United. Crystal Palace 3-1 Tottenham. Liverpool lost to Wolves 2-1. Next games Mar 14.\n" +
+"NCAAMB Conference Tournaments Mar 11-12: Iowa State 91 Arizona State 42. Kentucky 87 LSU 82. Auburn 79 Miss State 61. Iowa 75 Maryland 64. NC State 98 Pitt 88. Xavier upset Marquette 89-87. Selection Sunday March 15.\n" +
+"NHL: Regular season tight playoff races. MLB: Spring Training Opening Day April 2. NFL: Free Agency opens March 12 big signings expected. F1: Australian GP March 16 season opener. Tennis: Indian Wells ongoing.";
 
-NBA (last 24h):
-- Orlando 128, Cleveland 122 | NYK 134, Utah 117 | LAL 120, Minnesota 106
-- SAS 125, BOS 116 (MAJOR UPSET — Celtics fall in San Antonio)
-- CHI 130, GSW 124 (Bulls stun Warriors) | HOU 113, TOR 99 | NOP 122, TOR 111
-- SAC 114, IND 109 | LIVE: DEN 93 HOU 69 (3Q) | LAC 74 MIN 65 (2Q)
-Standings — West: OKC 51-15 (#1), SAS 48-17 (#2), LAL 40-25, HOU 40-24 | East: DET 46-18 (#1), BOS 43-22 (#2), NYK 42-25
-
-UEFA CHAMPIONS LEAGUE (last 48h — R16 1st legs):
-- Real Madrid 3-0 Man City | PSG 5-2 Chelsea | Bodo/Glimt 3-0 Sporting CP (UPSET)
-- Bayern Munich 6-1 Atalanta | Atletico Madrid 5-2 Tottenham
-- Arsenal 1-1 Leverkusen | Newcastle 1-1 Barcelona | Galatasaray 1-0 Liverpool (UPSET)
-
-EPL (last matchday Mar 3-5, no game today):
-- Chelsea 4-1 Aston Villa | Newcastle 2-1 Man United | Crystal Palace 3-1 Tottenham
-- Liverpool lost to Wolves 2-1. Next games Mar 14.
-
-NCAAMB Conference Tournaments (Mar 11-12):
-- Iowa State 91 Arizona State 42 | Kentucky 87 LSU 82 | Auburn 79 Miss State 61
-- Iowa 75 Maryland 64 | NC State 98 Pitt 88 | Xavier upset Marquette 89-87
-- Selection Sunday March 15.
-
-NHL: Regular season — tight playoff races East and West.
-MLB: Spring Training — Opening Day April 2.
-NFL: Free Agency officially opens March 12 — multiple big signings expected.
-F1: Australian GP March 16 — season opener. No race yet.
-Tennis: BNP Paribas Open (Indian Wells) ongoing.
-MLS: Season underway. Golf: Players Championship week.
-`;
-
-// ── GENERATE ──────────────────────────────────────────────────────────────
 async function generateRecap() {
-  const apiKey = getKey();
+  var apiKey = getKey();
   if (!apiKey) { changeKey(); return; }
 
-  const btn     = document.getElementById('gen-btn');
-  const label   = document.getElementById('gen-label');
-  const idle    = document.getElementById('idle-state');
-  const out     = document.getElementById('main-output');
-  const dateVal = document.getElementById('date-input').value;
+  var btn = document.getElementById('gen-btn');
+  var label = document.getElementById('gen-label');
+  var idle = document.getElementById('idle-state');
+  var out = document.getElementById('main-output');
+  var dateVal = document.getElementById('date-input').value;
 
   document.getElementById('selector-panel').classList.remove('open');
   document.getElementById('customize-btn').classList.remove('open');
@@ -713,52 +388,33 @@ async function generateRecap() {
   btn.classList.add('loading');
   btn.disabled = true;
   label.textContent = 'SCANNING FEEDS...';
-
   idle.style.display = 'none';
-  out.style.display  = 'block';
-  out.innerHTML = `<div class="loading-overlay">
-    <div class="loading-pulse">COMPILING BRIEF</div>
-    <div class="loading-sub">Scanning leagues · Filtering noise · Building your recap</div>
-  </div>`;
+  out.style.display = 'block';
+  out.innerHTML = '<div class="loading-overlay"><div class="loading-pulse">COMPILING BRIEF</div><div class="loading-sub">Scanning leagues - Filtering noise - Building your recap</div></div>';
 
-  const fmtDate = new Date(dateVal+'T12:00:00').toLocaleDateString('en-US',{
-    weekday:'long',year:'numeric',month:'long',day:'numeric'
+  var fmtDate = new Date(dateVal + 'T12:00:00').toLocaleDateString('en-US', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
-  const selected = LEAGUES.filter(l=>active[l.id]).map(l=>l.name).join(', ');
 
-  const prompt = `You are writing "The Daily Ball" — a no-fluff daily sports brief for ${fmtDate}.
+  var selected = LEAGUES.filter(function(l) { return active[l.id]; }).map(function(l) { return l.name; }).join(', ');
 
-USER'S SELECTED LEAGUES: ${selected}
-
-REAL DATA:
-${DATA_CTX}
-
-RULES:
-1. ONLY cover leagues from the user's selected list. Never add others.
-2. Only include a league if it had action in the last 24-48h OR had a massive news event. Skip inactive ones.
-3. Each active league gets exactly 5 entries in "bullets":
-   - scores: key results, upsets, must-know outcomes (1-2 sentences)
-   - performance: one standout performance (1 sentence)
-   - standings: race/title implications (1-2 sentences)
-   - news: trades, injuries, streaks (1-2 sentences)
-   - watch: { description, url, platform } — YouTube search "https://www.youtube.com/results?search_query=KEYWORD+KEYWORD" or X search
-4. Ultra short, direct writing. Zero filler.
-5. Water Cooler: 5 must-know bullets from sports NOT in user's list. + 1 watch object.
-
-Return ONLY valid JSON (no backticks, no markdown):
-{
-  "date": "${fmtDate}",
-  "leagues": [
-    { "name": "League Name", "bullets": { "scores":"...", "performance":"...", "standings":"...", "news":"...", "watch":{"description":"...","url":"...","platform":"youtube"} } }
-  ],
-  "waterCooler": {
-    "bullets": ["...","...","...","...","..."],
-    "watch": {"description":"...","url":"...","platform":"youtube"}
-  }
-}`;
+  var prompt = 'You are writing The Daily Ball, a no-fluff daily sports brief for ' + fmtDate + '.\n\n' +
+    'USER SELECTED LEAGUES: ' + selected + '\n\n' +
+    'REAL DATA:\n' + DATA_CTX + '\n\n' +
+    'RULES:\n' +
+    '1. ONLY cover leagues from the users selected list. Never add others.\n' +
+    '2. Only include a league if it had action in the last 24-48h OR had a massive news event. Skip inactive ones.\n' +
+    '3. Each active league gets exactly 5 entries in bullets: scores, performance, standings, news, watch.\n' +
+    '4. watch must be an object with description, url (YouTube search like https://www.youtube.com/results?search_query=KEYWORDS), and platform (youtube).\n' +
+    '5. Writing must be ultra short and direct. No apostrophes in text. No special characters.\n' +
+    '6. Water Cooler: 5 must-know bullets from sports NOT in users list, plus 1 watch object.\n\n' +
+    'CRITICAL: Return ONLY a valid JSON object. No backticks. No markdown. No text before or after. ' +
+    'Do NOT use apostrophes inside any string values - write "dont" not "don\'t". ' +
+    'All string values must be on a single line.\n\n' +
+    '{"date":"' + fmtDate + '","leagues":[{"name":"League Name","bullets":{"scores":"...","performance":"...","standings":"...","news":"...","watch":{"description":"...","url":"https://www.youtube.com/results?search_query=KEYWORDS","platform":"youtube"}}}],"waterCooler":{"bullets":["...","...","...","...","..."],"watch":{"description":"...","url":"https://www.youtube.com/results?search_query=KEYWORDS","platform":"youtube"}}}';
 
   try {
-    const res = await fetch('https://daily-ball-proxy.amirgelman.workers.dev', {
+    var res = await fetch('https://daily-ball-proxy.amirgelman.workers.dev', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -768,23 +424,44 @@ Return ONLY valid JSON (no backticks, no markdown):
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 4000,
-        messages: [{role:'user',content:prompt}]
+        messages: [{role: 'user', content: prompt}]
       })
     });
 
-    if (res.status === 401) throw new Error('Invalid API key — click "change key" in the top bar.');
-    if (!res.ok)           throw new Error(`API error ${res.status}`);
+    if (res.status === 401) throw new Error('Invalid API key - click change key in the top bar.');
+    if (!res.ok) throw new Error('API error ' + res.status);
 
-    const data    = await res.json();
-    const rawText = (data.content||[]).map(b=>b.text||'').join('');
-    const clean   = rawText.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
-    let recap;
-    try { recap = JSON.parse(clean); }
-    catch { const m = clean.match(/\{[\s\S]*\}/); recap = m ? JSON.parse(m[0]) : null; }
-    if (!recap) throw new Error('Could not parse response. Try again.');
+    var data = await res.json();
+    var rawText = (data.content || []).map(function(b) { return b.text || ''; }).join('');
+
+    // Clean the response
+    var clean = rawText
+      .replace(/```json\n?/g, '').replace(/```\n?/g, '')
+      .replace(/\u2018|\u2019/g, '').replace(/\u201C|\u201D/g, '"')
+      .replace(/\u2013|\u2014/g, '-')
+      .trim();
+
+    // Extract just the JSON object
+    var jsonMatch = clean.match(/\{[\s\S]*\}/);
+    if (jsonMatch) clean = jsonMatch[0];
+
+    var recap;
+    try {
+      recap = JSON.parse(clean);
+    } catch(e1) {
+      // Try removing all apostrophes that might be breaking JSON
+      var fixed = clean.replace(/'(?=[^"]*")/g, '');
+      try {
+        recap = JSON.parse(fixed);
+      } catch(e2) {
+        throw new Error('Brief generated but could not be displayed. Please try again.');
+      }
+    }
+
     renderRecap(recap);
+
   } catch(err) {
-    out.innerHTML = `<div class="error-box">⚠️ ${err.message}</div>`;
+    out.innerHTML = '<div class="error-box">Error: ' + err.message + '</div>';
   } finally {
     btn.classList.remove('loading');
     btn.disabled = false;
@@ -792,47 +469,36 @@ Return ONLY valid JSON (no backticks, no markdown):
   }
 }
 
-// ── RENDER ────────────────────────────────────────────────────────────────
 function renderRecap(data) {
-  const out = document.getElementById('main-output');
-  let html = `<div class="date-header">DAILY BRIEF — ${data.date||'TODAY'}</div><div class="leagues-grid">`;
+  var out = document.getElementById('main-output');
+  var html = '<div class="date-header">DAILY BRIEF - ' + (data.date || 'TODAY') + '</div><div class="leagues-grid">';
 
-  (data.leagues||[]).forEach(lg => {
-    const color = COLORS[lg.name] || '';
-    const meta  = LEAGUES.find(l=>l.name===lg.name);
-    const emoji = meta ? meta.emoji : '🏅';
-    const b = lg.bullets || {};
+  (data.leagues || []).forEach(function(lg) {
+    var color = COLORS[lg.name] || '';
+    var meta = LEAGUES.find(function(l) { return l.name === lg.name; });
+    var emoji = meta ? meta.emoji : '🏅';
+    var b = lg.bullets || {};
 
-    html += `<div class="league-card">
-      <div class="card-head ${color}">
-        <div class="league-name-label">${lg.name}</div>
-        <div style="font-size:18px">${emoji}</div>
-      </div>
-      <div class="card-body">`;
+    html += '<div class="league-card"><div class="card-head ' + color + '"><div class="league-name-label">' + lg.name + '</div><div style="font-size:18px">' + emoji + '</div></div><div class="card-body">';
 
-    if (b.scores)      html += mkBullet('sc','🎯','SCORES',b.scores);
-    if (b.performance) html += mkBullet('pf','⚡','PERFORMANCE',b.performance);
-    if (b.standings)   html += mkBullet('st','📊','STANDINGS',b.standings);
-    if (b.news)        html += mkBullet('nw','📰','NEWS',b.news);
+    if (b.scores)      html += mkBullet('sc', '🎯', 'SCORES', b.scores);
+    if (b.performance) html += mkBullet('pf', '⚡', 'PERFORMANCE', b.performance);
+    if (b.standings)   html += mkBullet('st', '📊', 'STANDINGS', b.standings);
+    if (b.news)        html += mkBullet('nw', '📰', 'NEWS', b.news);
     if (b.watch)       html += mkWatch(b.watch);
 
-    html += `</div></div>`;
+    html += '</div></div>';
   });
 
   if (data.waterCooler) {
-    const wc = data.waterCooler;
-    html += `<div class="league-card full-width">
-      <div class="card-head teal">
-        <div class="league-name-label">🌊 THE WATER COOLER</div>
-        <div style="font-size:11px;font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:1px;">OTHER LEAGUES · MUST-KNOW</div>
-      </div>
-      <div class="card-body">`;
-
-    const icons = ['🏒','⚾','🎾','⛳','🥊'];
-    (wc.bullets||[]).forEach((b,i) => html += mkBullet('nw', icons[i]||'📌', `BULLETIN ${i+1}`, b));
+    var wc = data.waterCooler;
+    html += '<div class="league-card full-width"><div class="card-head teal"><div class="league-name-label">🌊 THE WATER COOLER</div><div style="font-size:11px;font-family:Barlow Condensed,sans-serif;font-weight:700;letter-spacing:1px;">OTHER LEAGUES - MUST KNOW</div></div><div class="card-body">';
+    var icons = ['🏒','⚾','🎾','⛳','🥊'];
+    (wc.bullets || []).forEach(function(b, i) {
+      html += mkBullet('nw', icons[i] || '📌', 'BULLETIN ' + (i+1), b);
+    });
     if (wc.watch) html += mkWatch(wc.watch);
-
-    html += `</div></div>`;
+    html += '</div></div>';
   }
 
   html += '</div>';
@@ -840,25 +506,14 @@ function renderRecap(data) {
 }
 
 function mkBullet(cls, icon, label, text) {
-  return `<div class="bullet">
-    <div class="b-icon ${cls}">${icon}</div>
-    <div class="b-text"><span class="b-label">${label}</span>${text}</div>
-  </div>`;
+  return '<div class="bullet"><div class="b-icon ' + cls + '">' + icon + '</div><div class="b-text"><span class="b-label">' + label + '</span>' + text + '</div></div>';
 }
 
 function mkWatch(w) {
-  const platform = w.platform||'youtube';
-  const cls   = platform==='youtube'?'yt':'xp';
-  const lbl   = platform==='youtube'?'▶ WATCH ON YOUTUBE':'𝕏 WATCH ON X';
-  return `<div class="bullet">
-    <div class="b-icon wt">🎬</div>
-    <div class="b-text">
-      <span class="b-label">THE ONE PLAY YOU NEED TO WATCH</span>
-      ${w.description||''}
-      <br>
-      <a href="${w.url}" target="_blank" rel="noopener" class="watch-btn ${cls}">${lbl}</a>
-    </div>
-  </div>`;
+  var platform = w.platform || 'youtube';
+  var cls = platform === 'youtube' ? 'yt' : 'xp';
+  var lbl = platform === 'youtube' ? '&#9654; WATCH ON YOUTUBE' : 'X WATCH ON X';
+  return '<div class="bullet"><div class="b-icon wt">🎬</div><div class="b-text"><span class="b-label">THE ONE PLAY YOU NEED TO WATCH</span>' + (w.description || '') + '<br><a href="' + w.url + '" target="_blank" rel="noopener" class="watch-btn ' + cls + '">' + lbl + '</a></div></div>';
 }
 </script>
 </body>
