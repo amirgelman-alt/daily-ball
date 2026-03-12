@@ -294,52 +294,52 @@ async function generate(){
   var sel=LL.filter(function(l){return AC[l.id];}).map(function(l){return l.name;}).join(', ');
 
   var prompt =
-    'You are the editor-in-chief of The Daily Ball, a sharp daily sports brief for '+fd+'.\n\n'+
+    'TODAY: '+fd+'. You are the editor-in-chief of The Daily Ball, a sharp daily sports brief.\n'+
     'SELECTED LEAGUES: '+sel+'\n\n'+
-    'DATA:\n'+
-    'NBA last 24h: Orlando 128 Cleveland 122. NYK 134 Utah 117. LAL 120 Minnesota 106. SAS 125 BOS 116 MAJOR UPSET. CHI 130 GSW 124. HOU 113 TOR 99. SAC 114 IND 109.\n'+
-    'NBA Standings West: OKC 51-15 #1, SAS 48-17 #2, LAL 40-25, HOU 40-24. East: DET 46-18 #1, BOS 43-22 #2, NYK 42-25.\n'+
-    'UCL R16 1st legs: Real Madrid 3-0 Man City. PSG 5-2 Chelsea. Bodo/Glimt 3-0 Sporting UPSET. Bayern 6-1 Atalanta. Atletico 5-2 Tottenham. Arsenal 1-1 Leverkusen. Newcastle 1-1 Barcelona. Galatasaray 1-0 Liverpool UPSET.\n'+
-    'EPL last played Mar 3-5 (no games today): Chelsea 4-1 Aston Villa. Newcastle 2-1 Man Utd. Crystal Palace 3-1 Tottenham. Liverpool lost to Wolves 2-1. Next games Mar 14.\n'+
-    'NCAAMB Conf Tournaments: Iowa State 91 Arizona State 42. Kentucky 87 LSU 82. Auburn 79 Miss State 61. Iowa 75 Maryland 64. NC State 98 Pitt 88. Xavier upset Marquette 89-87. Selection Sunday March 15.\n'+
-    'NFL: Free Agency opens today March 12 - no games, no scores, just roster news pending.\n'+
-    'College Football: offseason, spring practices starting.\n'+
-    'F1: Australian GP is March 16 - no race yet, just pre-season news.\n'+
-    'MLB: Spring Training only, Opening Day April 2.\n'+
-    'NHL: regular season games ongoing.\n'+
-    'Tennis: BNP Paribas Open Indian Wells ongoing.\n\n'+
-    'EDITOR-IN-CHIEF RULES - these are non-negotiable:\n'+
-    '1. SKIP any league that has nothing meaningful to report. A league with no games, no scores, and no real news does NOT get a card. NFL free agency just opened with no signings yet = skip it. College Football in offseason = skip it. F1 with no race = skip it. Be ruthless. Only publish what is genuinely worth reading today.\n'+
-    '2. Each of the 5 bullets covers a DIFFERENT angle. A journalist never repeats the same story twice. The bullets are:\n'+
-    '   - [SCORES]: the raw results - what happened, what scores, what upsets. Just the facts.\n'+
-    '   - [PERF]: one specific player or team performance that stood out. Name the player. Give the stat or moment. Do NOT repeat a score already in SCORES.\n'+
-    '   - [STAND]: the table/standings implications ONLY. Who moved up, who is in danger, what race is tightening. No scores here.\n'+
-    '   - [NEWS]: injuries, trades, suspensions, streaks, or off-field stories. Must be something NOT already covered in the other bullets.\n'+
-    '   - [WATCH]: the single best play or moment to watch. YouTube search URL.\n'+
-    '3. If a league has scores but literally nothing interesting for PERF, STAND, or NEWS, you may write "Nothing new to report" for that bullet - but having 3+ boring bullets means the league should be skipped entirely.\n'+
-    '4. Writing style: direct, confident, like a sports anchor. Short sentences. No "it is worth noting" or "importantly". Just say it.\n\n'+
-    'OUTPUT FORMAT - use exactly these tags, no other text:\n\n'+
-    '[LEAGUE]NBA[/LEAGUE]\n'+
-    '[SCORES]text here[/SCORES]\n'+
-    '[PERF]text here[/PERF]\n'+
-    '[STAND]text here[/STAND]\n'+
-    '[NEWS]text here[/NEWS]\n'+
-    '[WATCH]description|https://www.youtube.com/results?search_query=keywords[/WATCH]\n\n'+
-    '...repeat for each league that passes the editorial bar...\n\n'+
+
+    'STEP 1 - SEARCH THE WEB FIRST.\n'+
+    'For each selected league, search the web RIGHT NOW to get todays actual scores, results, standings, and news.\n'+
+    'Search queries to run: "[league] scores '+fd+'", "[league] results today", "[league] standings", "[league] news today".\n'+
+    'ONLY use facts from your search results. Never use training data for scores or player stats. If you cannot find real data for a league, skip it.\n\n'+
+
+    'STEP 2 - APPLY THE EDITORIAL FILTER.\n'+
+    'Only publish a league card if it has genuine news from the last 24-48 hours. No games played + no real news = skip the league entirely. Be ruthless.\n\n'+
+
+    'STEP 3 - WRITE THE BRIEF. Each league card has 4 bullets + 3 highlights. STRICT RULES:\n'+
+    '[SCORES] - 1 sentence max. Scores and upset results only. Nothing else.\n'+
+    '[PERF] - 1 sentence max. One specific player, one specific stat or moment. Must be different info from SCORES.\n'+
+    '[STAND] - 1 sentence max. Table/standings impact only - who moved, who is in danger. No scores, no player names repeated from above.\n'+
+    '[NEWS] - 1 sentence max. Injuries, trades, suspensions, or streaks. Must be completely new info not mentioned in any other bullet.\n'+
+    '[WATCH1] [WATCH2] [WATCH3] - The 3 most exciting moments from today to watch. Each gets a short punchy label and a YouTube search URL.\n\n'+
+
+    'WRITING RULES: Each bullet must contain different information - a journalist never repeats the same story twice. Max 20 words per bullet. Direct and confident. No "it is worth noting", no filler.\n\n'+
+
+    'OUTPUT - use exactly these tags and nothing else:\n\n'+
+    '[LEAGUE]League Name[/LEAGUE]\n'+
+    '[SCORES]one sentence[/SCORES]\n'+
+    '[PERF]one sentence[/PERF]\n'+
+    '[STAND]one sentence[/STAND]\n'+
+    '[NEWS]one sentence[/NEWS]\n'+
+    '[WATCH1]Punchy label|https://www.youtube.com/results?search_query=specific+keywords[/WATCH1]\n'+
+    '[WATCH2]Punchy label|https://www.youtube.com/results?search_query=specific+keywords[/WATCH2]\n'+
+    '[WATCH3]Punchy label|https://www.youtube.com/results?search_query=specific+keywords[/WATCH3]\n\n'+
+    '...one block per qualifying league...\n\n'+
     '[WATERCOOLER]\n'+
-    '[B1]one sharp sentence from outside the selected leagues[/B1]\n'+
-    '[B2]one sharp sentence[/B2]\n'+
-    '[B3]one sharp sentence[/B3]\n'+
-    '[B4]one sharp sentence[/B4]\n'+
-    '[B5]one sharp sentence[/B5]\n'+
-    '[WATCH]description|https://www.youtube.com/results?search_query=keywords[/WATCH]\n'+
+    '[B1]One sharp sentence about a sport outside the selected list[/B1]\n'+
+    '[B2]One sharp sentence[/B2]\n'+
+    '[B3]One sharp sentence[/B3]\n'+
+    '[B4]One sharp sentence[/B4]\n'+
+    '[B5]One sharp sentence[/B5]\n'+
+    '[WATCH1]Punchy label|https://www.youtube.com/results?search_query=keywords[/WATCH1]\n'+
+    '[WATCH2]Punchy label|https://www.youtube.com/results?search_query=keywords[/WATCH2]\n'+
+    '[WATCH3]Punchy label|https://www.youtube.com/results?search_query=keywords[/WATCH3]\n'+
     '[/WATERCOOLER]';
 
   try {
     var res=await fetch('https://daily-ball-proxy.amirgelman.workers.dev',{
       method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:4000,messages:[{role:'user',content:prompt}]})
+      headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-beta':'web-search-2025-03-05'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:8000,messages:[{role:'user',content:prompt}],tools:[{type:'web_search_20250305',name:'web_search'}]})
     });
     if(res.status===401) throw new Error('Invalid API key - click change key.');
     if(!res.ok) throw new Error('API error '+res.status);
@@ -384,17 +384,17 @@ function renderText(text, fd){
     var perf=tag(block,'PERF');
     var stand=tag(block,'STAND');
     var news=tag(block,'NEWS');
-    var watchRaw=tag(block,'WATCH');
-    var watchParts=watchRaw.split('|');
-    var watchDesc=watchParts[0]||'';
-    var watchUrl=watchParts[1]||'https://www.youtube.com/results?search_query=sports+highlights';
+    var w1=tag(block,'WATCH1'), w2=tag(block,'WATCH2'), w3=tag(block,'WATCH3');
+    // fallback for old single WATCH tag
+    if(!w1){ var wf=tag(block,'WATCH'); w1=wf; }
 
     html+='<div class="card"><div class="chead '+color+'"><div class="cname">'+lname+'</div><div style="font-size:18px">'+em+'</div></div><div class="cbody">';
     if(scores) html+=row('sc','🎯','SCORES',scores);
     if(perf)   html+=row('pf','⚡','PERFORMANCE',perf);
     if(stand)  html+=row('st','📊','STANDINGS',stand);
     if(news)   html+=row('nw','📰','NEWS',news);
-    if(watchDesc) html+=watchRow(watchDesc,watchUrl);
+    var watches=[w1,w2,w3].filter(Boolean);
+    if(watches.length) html+=watchRows(watches);
     html+='</div></div>';
   }
 
@@ -407,7 +407,11 @@ function renderText(text, fd){
     html+='<div class="card wide"><div class="chead teal"><div class="cname">🌊 THE WATER COOLER</div><div style="font-size:11px;font-family:Barlow Condensed,sans-serif;font-weight:700;letter-spacing:1px">OTHER LEAGUES - MUST KNOW</div></div><div class="cbody">';
     var icons=['🏒','⚾','🎾','⛳','🥊'];
     [b1,b2,b3,b4,b5].forEach(function(b,i){ if(b) html+=row('nw',icons[i],'BULLETIN '+(i+1),b); });
-    if(wcp[0]) html+=watchRow(wcp[0], wcp[1]||'https://www.youtube.com/results?search_query=sports+highlights');
+    var wcWatches=[];
+    var ww1=tag(wcBlock,'WATCH1'),ww2=tag(wcBlock,'WATCH2'),ww3=tag(wcBlock,'WATCH3');
+    if(!ww1){var wwf=tag(wcBlock,'WATCH'); ww1=wwf;}
+    [ww1,ww2,ww3].forEach(function(w){if(w)wcWatches.push(w);});
+    if(wcWatches.length) html+=watchRows(wcWatches);
     html+='</div></div>';
   }
 
@@ -418,8 +422,16 @@ function renderText(text, fd){
 function row(cls,ico,lbl,txt){
   return '<div class="brow"><div class="bico '+cls+'">'+ico+'</div><div class="btxt"><span class="blbl">'+lbl+'</span>'+txt+'</div></div>';
 }
-function watchRow(desc,url){
-  return '<div class="brow"><div class="bico wt">🎬</div><div class="btxt"><span class="blbl">THE ONE PLAY YOU NEED TO WATCH</span>'+desc+'<br><a href="'+url.trim()+'" target="_blank" rel="noopener" class="wbtn yt">&#9654; WATCH ON YOUTUBE</a></div></div>';
+function watchRows(watches){
+  if(!watches.length) return '';
+  var label = watches.length===1 ? 'THE ONE PLAY YOU NEED TO WATCH' : 'MUST-WATCH HIGHLIGHTS';
+  var links = watches.map(function(w,i){
+    var parts=w.split('|');
+    var desc=parts[0]||'Watch highlight '+(i+1);
+    var url=(parts[1]||'https://www.youtube.com/results?search_query=sports+highlights').trim();
+    return '<a href="'+url+'" target="_blank" rel="noopener" class="wbtn yt" style="display:block;margin-bottom:4px">&#9654; '+desc+'</a>';
+  }).join('');
+  return '<div class="brow"><div class="bico wt">🎬</div><div class="btxt"><span class="blbl">'+label+'</span>'+links+'</div></div>';
 }
 </script>
 </body>
