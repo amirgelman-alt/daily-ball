@@ -6,128 +6,132 @@
 <title>THE DAILY BALL</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
-  :root { --ink:#0a0a0a; --paper:#f2ede4; --accent:#e63000; --accent2:#0057ff; --muted:#8a8279; --border:#d4cfc5; }
-  * { box-sizing:border-box; margin:0; padding:0; }
-  body { background:var(--paper); color:var(--ink); font-family:'Space Mono',monospace; font-size:13px; line-height:1.5; min-height:100vh; }
+  :root{--ink:#0a0a0a;--paper:#f2ede4;--accent:#e63000;--accent2:#0057ff;--muted:#8a8279;--border:#d4cfc5;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);color:var(--ink);font-family:'Space Mono',monospace;font-size:13px;line-height:1.5;min-height:100vh;}
 
   /* GATE */
-  .gate { position:fixed; inset:0; background:var(--ink); z-index:1000; display:flex; align-items:center; justify-content:center; padding:24px; }
-  .gate-box { background:#141414; border:1px solid #2a2a2a; border-top:4px solid var(--accent); max-width:480px; width:100%; padding:36px 32px 32px; }
-  .gate-logo { font-family:'Bebas Neue',sans-serif; font-size:38px; letter-spacing:3px; color:#fff; margin-bottom:4px; }
-  .gate-logo span { color:var(--accent); }
-  .gate-sub { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#555; margin-bottom:28px; }
-  .gate-lbl { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#666; margin-bottom:8px; display:block; }
-  .gate-inp { width:100%; background:#0d0d0d; border:1px solid #333; color:#fff; font-family:'Space Mono',monospace; font-size:12px; padding:10px 14px; outline:none; margin-bottom:10px; }
-  .gate-inp:focus { border-color:var(--accent); }
-  .gate-inp.err { border-color:#f44; }
-  .gate-err { font-size:11px; color:#f66; margin-bottom:10px; display:none; }
-  .gate-err.show { display:block; }
-  .gate-hint { font-size:10px; color:#444; margin-bottom:20px; line-height:1.6; }
-  .gate-hint a { color:#666; }
-  .gate-btn { background:var(--accent); color:#fff; border:none; width:100%; padding:11px; font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:3px; cursor:pointer; }
-  .gate-btn:hover { background:#c22a00; }
-  .gate-note { margin-top:16px; padding:12px 14px; background:#0d0d0d; border-left:3px solid #2a2a2a; font-size:10px; color:#444; line-height:1.7; }
-  .gate-note strong { color:#666; }
+  .gate{position:fixed;inset:0;background:var(--ink);z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px;}
+  .gate-box{background:#141414;border:1px solid #2a2a2a;border-top:4px solid var(--accent);max-width:480px;width:100%;padding:36px 32px 32px;}
+  .gate-logo{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:3px;color:#fff;margin-bottom:4px;}
+  .gate-logo span{color:var(--accent);}
+  .gate-sub{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#555;margin-bottom:28px;}
+  .gate-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-bottom:8px;display:block;}
+  .gate-inp{width:100%;background:#0d0d0d;border:1px solid #333;color:#fff;font-family:'Space Mono',monospace;font-size:12px;padding:10px 14px;outline:none;margin-bottom:10px;}
+  .gate-inp:focus{border-color:var(--accent);}
+  .gate-inp.err{border-color:#f44;}
+  .gate-err{font-size:11px;color:#f66;margin-bottom:10px;display:none;}
+  .gate-err.show{display:block;}
+  .gate-hint{font-size:10px;color:#444;margin-bottom:20px;line-height:1.6;}
+  .gate-hint a{color:#666;}
+  .gate-btn{background:var(--accent);color:#fff;border:none;width:100%;padding:11px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;cursor:pointer;}
+  .gate-btn:hover{background:#c22a00;}
+  .gate-note{margin-top:16px;padding:12px 14px;background:#0d0d0d;border-left:3px solid #2a2a2a;font-size:10px;color:#444;line-height:1.7;}
+  .gate-note strong{color:#666;}
 
-  /* APP */
-  .masthead { background:var(--ink); color:var(--paper); padding:18px 32px 14px; border-bottom:4px solid var(--accent); display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; }
-  .masthead-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,6vw,72px); letter-spacing:3px; line-height:1; color:#fff; }
-  .masthead-title span { color:var(--accent); }
-  .masthead-meta { font-size:10px; color:#888; letter-spacing:2px; text-transform:uppercase; text-align:right; }
-  .masthead-meta strong { display:block; font-size:12px; color:var(--paper); margin-bottom:2px; }
+  /* MASTHEAD */
+  .masthead{background:var(--ink);color:var(--paper);padding:18px 32px 14px;border-bottom:4px solid var(--accent);display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .masthead-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,6vw,72px);letter-spacing:3px;line-height:1;color:#fff;}
+  .masthead-title span{color:var(--accent);}
+  .masthead-meta{font-size:10px;color:#888;letter-spacing:2px;text-transform:uppercase;text-align:right;}
+  .masthead-meta strong{display:block;font-size:12px;color:var(--paper);margin-bottom:2px;}
 
-  .ticker-bar { background:var(--accent); color:#fff; font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:700; letter-spacing:1px; padding:5px 0; overflow:hidden; white-space:nowrap; }
-  .ticker-inner { display:inline-block; animation:ticker 55s linear infinite; padding-left:100%; }
-  @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-100%)} }
+  .ticker-bar{background:var(--accent);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;padding:5px 0;overflow:hidden;white-space:nowrap;}
+  .ticker-inner{display:inline-block;animation:ticker 60s linear infinite;padding-left:100%;}
+  @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
 
-  .key-bar { background:#111; padding:6px 32px; display:flex; align-items:center; gap:10px; font-size:10px; color:#444; letter-spacing:1px; border-bottom:1px solid #1e1e1e; }
-  .key-dot { width:6px; height:6px; border-radius:50%; background:#2a7a2a; flex-shrink:0; }
-  .key-txt { flex:1; }
-  .key-change { background:none; border:none; color:#444; font-family:'Space Mono',monospace; font-size:10px; cursor:pointer; text-decoration:underline; padding:0; }
-  .key-change:hover { color:var(--accent); }
+  .key-bar{background:#111;padding:6px 32px;display:flex;align-items:center;gap:10px;font-size:10px;color:#444;letter-spacing:1px;border-bottom:1px solid #1e1e1e;}
+  .key-dot{width:6px;height:6px;border-radius:50%;background:#2a7a2a;flex-shrink:0;}
+  .key-txt{flex:1;}
+  .key-change{background:none;border:none;color:#444;font-family:'Space Mono',monospace;font-size:10px;cursor:pointer;text-decoration:underline;padding:0;}
+  .key-change:hover{color:var(--accent);}
 
-  .gen-bar { background:var(--ink); padding:10px 32px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
-  .gen-bar label { color:#aaa; font-size:10px; letter-spacing:2px; text-transform:uppercase; }
-  .date-pick { background:#1a1a1a; border:1px solid #444; color:#fff; font-family:'Space Mono',monospace; font-size:12px; padding:6px 10px; outline:none; cursor:pointer; }
-  .btn-lg { background:none; border:1px solid #3a3a3a; color:#999; font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:700; letter-spacing:2px; padding:6px 14px; cursor:pointer; display:flex; align-items:center; gap:7px; transition:all .15s; }
-  .btn-lg:hover { border-color:#888; color:#ddd; }
-  .btn-lg.open { border-color:var(--accent); color:var(--accent); background:rgba(230,48,0,.1); }
-  .chev { transition:transform .25s; }
-  .btn-lg.open .chev { transform:rotate(180deg); }
-  .badge { background:var(--accent); color:#fff; font-size:10px; padding:1px 7px; border-radius:10px; min-width:22px; text-align:center; font-weight:700; }
-  .btn-gen { background:var(--accent); color:#fff; border:none; padding:8px 22px; font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:2px; cursor:pointer; display:flex; align-items:center; gap:8px; margin-left:auto; transition:background .15s; }
-  .btn-gen:hover { background:#c22a00; }
-  .btn-gen:disabled { background:#555; cursor:not-allowed; }
-  .spin { width:14px; height:14px; border:2px solid rgba(255,255,255,.3); border-top-color:#fff; border-radius:50%; animation:spin .7s linear infinite; display:none; }
-  .btn-gen.loading .spin { display:block; }
-  @keyframes spin { to{transform:rotate(360deg)} }
+  .gen-bar{background:var(--ink);padding:10px 32px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .gen-bar label{color:#aaa;font-size:10px;letter-spacing:2px;text-transform:uppercase;}
+  .date-pick{background:#1a1a1a;border:1px solid #444;color:#fff;font-family:'Space Mono',monospace;font-size:12px;padding:6px 10px;outline:none;cursor:pointer;}
+  .btn-lg{background:none;border:1px solid #3a3a3a;color:#999;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:2px;padding:6px 14px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .15s;}
+  .btn-lg:hover{border-color:#888;color:#ddd;}
+  .btn-lg.open{border-color:var(--accent);color:var(--accent);background:rgba(230,48,0,.1);}
+  .chev{transition:transform .25s;}
+  .btn-lg.open .chev{transform:rotate(180deg);}
+  .badge{background:var(--accent);color:#fff;font-size:10px;padding:1px 7px;border-radius:10px;min-width:22px;text-align:center;font-weight:700;}
+  .btn-gen{background:var(--accent);color:#fff;border:none;padding:8px 22px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;cursor:pointer;display:flex;align-items:center;gap:8px;margin-left:auto;transition:background .15s;}
+  .btn-gen:hover{background:#c22a00;}
+  .btn-gen:disabled{background:#555;cursor:not-allowed;}
+  .spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none;}
+  .btn-gen.loading .spin{display:block;}
+  @keyframes spin{to{transform:rotate(360deg)}}
 
-  .sel-panel { background:#131313; border-bottom:2px solid #252525; max-height:0; overflow:hidden; transition:max-height .38s cubic-bezier(.4,0,.2,1); }
-  .sel-panel.open { max-height:600px; }
-  .sel-inner { padding:20px 32px 24px; opacity:0; transition:opacity .2s .12s; }
-  .sel-panel.open .sel-inner { opacity:1; }
-  .sel-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; flex-wrap:wrap; gap:10px; }
-  .sel-lbl { font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#666; }
-  .sel-lbl span { color:var(--accent); }
-  .qbtns { display:flex; gap:8px; }
-  .qbtn { background:none; border:1px solid #333; color:#666; font-family:'Space Mono',monospace; font-size:9px; letter-spacing:1px; padding:4px 10px; cursor:pointer; text-transform:uppercase; }
-  .qbtn:hover { border-color:var(--accent); color:var(--accent); }
-  .sgroups { display:flex; flex-direction:column; gap:14px; }
-  .sgroup { display:flex; align-items:flex-start; gap:14px; }
-  .slbl { font-family:'Barlow Condensed',sans-serif; font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#444; width:72px; flex-shrink:0; padding-top:6px; border-top:1px solid #222; }
-  .chips { display:flex; flex-wrap:wrap; gap:7px; flex:1; }
-  .chip { display:inline-flex; align-items:center; gap:5px; padding:4px 12px 4px 9px; border:1px solid #2a2a2a; cursor:pointer; font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:600; color:#555; background:#1a1a1a; transition:all .15s; user-select:none; }
-  .chip:hover { border-color:#555; color:#bbb; }
-  .chip.on { border-color:var(--accent); color:#fff; background:#1f0800; }
-  .pip { width:5px; height:5px; border-radius:50%; background:#333; flex-shrink:0; transition:background .15s; }
-  .chip.on .pip { background:var(--accent); }
+  .sel-panel{background:#131313;border-bottom:2px solid #252525;max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.4,0,.2,1);}
+  .sel-panel.open{max-height:600px;}
+  .sel-inner{padding:20px 32px 24px;opacity:0;transition:opacity .2s .12s;}
+  .sel-panel.open .sel-inner{opacity:1;}
+  .sel-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px;}
+  .sel-lbl{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#666;}
+  .sel-lbl span{color:var(--accent);}
+  .qbtns{display:flex;gap:8px;}
+  .qbtn{background:none;border:1px solid #333;color:#666;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;padding:4px 10px;cursor:pointer;text-transform:uppercase;}
+  .qbtn:hover{border-color:var(--accent);color:var(--accent);}
+  .sgroups{display:flex;flex-direction:column;gap:14px;}
+  .sgroup{display:flex;align-items:flex-start;gap:14px;}
+  .slbl{font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#444;width:72px;flex-shrink:0;padding-top:6px;border-top:1px solid #222;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;flex:1;}
+  .chip{display:inline-flex;align-items:center;gap:5px;padding:4px 12px 4px 9px;border:1px solid #2a2a2a;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;color:#555;background:#1a1a1a;transition:all .15s;user-select:none;}
+  .chip:hover{border-color:#555;color:#bbb;}
+  .chip.on{border-color:var(--accent);color:#fff;background:#1f0800;}
+  .pip{width:5px;height:5px;border-radius:50%;background:#333;flex-shrink:0;transition:background .15s;}
+  .chip.on .pip{background:var(--accent);}
 
-  .content { max-width:1140px; margin:0 auto; padding:28px 20px 60px; }
-  .idle { text-align:center; padding:70px 20px; color:var(--muted); }
-  .idle .ico { font-size:54px; display:block; margin-bottom:18px; }
-  .idle h2 { font-family:'Bebas Neue',sans-serif; font-size:30px; color:var(--ink); letter-spacing:2px; margin-bottom:8px; }
-  .idle p { font-size:12px; }
-  .spinner-wrap { text-align:center; padding:70px 20px; }
-  .pulse { font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:4px; color:var(--muted); animation:pulse 1.2s ease-in-out infinite; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.2} }
-  .pulse-sub { font-size:11px; color:var(--muted); margin-top:10px; letter-spacing:1px; }
+  .content{max-width:1140px;margin:0 auto;padding:28px 20px 60px;}
+  .idle{text-align:center;padding:70px 20px;color:var(--muted);}
+  .idle .ico{font-size:54px;display:block;margin-bottom:18px;}
+  .idle h2{font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--ink);letter-spacing:2px;margin-bottom:8px;}
+  .loading-wrap{text-align:center;padding:70px 20px;}
+  .pulse{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:4px;color:var(--muted);animation:pulse 1.2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
+  .pulse-sub{font-size:11px;color:var(--muted);margin-top:10px;letter-spacing:1px;}
+  .pulse-step{font-size:10px;color:#888;margin-top:8px;letter-spacing:1px;}
 
-  .dheader { font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border); padding-bottom:6px; margin-bottom:22px; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:16px; }
-  .card { background:#fff; border:1px solid var(--border); border-top:3px solid var(--ink); overflow:hidden; transition:box-shadow .15s; }
-  .card:hover { box-shadow:4px 4px 0 var(--ink); }
-  .card.wide { grid-column:1/-1; border-top-color:#007a7a; }
-  .chead { background:var(--ink); color:#fff; padding:8px 14px; display:flex; align-items:center; justify-content:space-between; }
-  .chead.red    { background:var(--accent); }
-  .chead.blue   { background:var(--accent2); }
-  .chead.green  { background:#1a7a1a; }
-  .chead.purple { background:#5a0080; }
-  .chead.orange { background:#b85500; }
-  .chead.teal   { background:#007a7a; }
-  .cname { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:2px; }
-  .cbody { padding:14px; }
-  .brow { display:flex; gap:10px; margin-bottom:12px; padding-bottom:12px; border-bottom:1px dashed var(--border); }
-  .brow:last-child { margin-bottom:0; padding-bottom:0; border-bottom:none; }
-  .bico { flex-shrink:0; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; margin-top:1px; }
-  .bico.sc { background:#e8f0ff; }
-  .bico.pf { background:#fff0e8; }
-  .bico.st { background:#e8ffe8; }
-  .bico.nw { background:#f0e8ff; }
-  .bico.wt { background:#fff8d0; }
-  .btxt { flex:1; font-size:12px; line-height:1.55; color:#222; }
-  .blbl { display:block; font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:3px; }
-  .wbtn { display:inline-flex; align-items:center; gap:5px; text-decoration:none; padding:4px 10px; font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:1px; margin-top:5px; color:#fff; }
-  .wbtn.yt { background:#cc0000; }
-  .wbtn.xp { background:#000; }
-  .errbox { background:#fff5f5; border:1px solid #faa; border-left:4px solid var(--accent); padding:16px; font-size:12px; color:#800; }
+  .dheader{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:22px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;}
+  .card{background:#fff;border:1px solid var(--border);border-top:3px solid var(--ink);overflow:hidden;transition:box-shadow .15s;}
+  .card:hover{box-shadow:4px 4px 0 var(--ink);}
+  .card.wide{grid-column:1/-1;border-top-color:#007a7a;}
+  .chead{background:var(--ink);color:#fff;padding:8px 14px;display:flex;align-items:center;justify-content:space-between;}
+  .chead.red{background:var(--accent);}
+  .chead.blue{background:var(--accent2);}
+  .chead.green{background:#1a7a1a;}
+  .chead.purple{background:#5a0080;}
+  .chead.orange{background:#b85500;}
+  .chead.teal{background:#007a7a;}
+  .cname{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;}
+  .cbody{padding:14px;}
+  .brow{display:flex;gap:10px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px dashed var(--border);}
+  .brow:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+  .bico{flex-shrink:0;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:2px;}
+  .bico.sc{background:#e8f0ff;}
+  .bico.nk{background:#fff0e8;}
+  .bico.pf{background:#ffeee8;}
+  .bico.st{background:#e8ffe8;}
+  .bico.nw{background:#f0e8ff;}
+  .bico.wt{background:#fff8d0;}
+  .btxt{flex:1;font-size:12px;line-height:1.6;color:#222;}
+  .blbl{display:block;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+  .vlinks{display:flex;flex-direction:column;gap:5px;margin-top:5px;}
+  .vrow{display:flex;gap:6px;flex-wrap:wrap;}
+  .wbtn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;padding:4px 10px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;color:#fff;transition:opacity .15s;}
+  .wbtn:hover{opacity:.8;}
+  .wbtn.yt{background:#cc0000;}
+  .wbtn.xb{background:#000;}
+  .errbox{background:#fff5f5;border:1px solid #faa;border-left:4px solid var(--accent);padding:16px;font-size:12px;color:#800;white-space:pre-wrap;}
 
-  @media(max-width:600px) {
-    .masthead,.gen-bar,.key-bar { padding-left:16px; padding-right:16px; }
-    .sel-inner { padding:14px 16px 18px; }
-    .content { padding:20px 12px 40px; }
-    .grid { grid-template-columns:1fr; }
-    .slbl { width:56px; font-size:8px; }
-    .btn-gen { margin-left:0; }
+  @media(max-width:600px){
+    .masthead,.gen-bar,.key-bar{padding-left:16px;padding-right:16px;}
+    .sel-inner{padding:14px 16px 18px;}
+    .content{padding:20px 12px 40px;}
+    .grid{grid-template-columns:1fr;}
+    .btn-gen{margin-left:0;}
+    .slbl{width:56px;font-size:8px;}
   }
 </style>
 </head>
@@ -141,7 +145,7 @@
     <label class="gate-lbl" for="kip">Your Anthropic API Key</label>
     <input class="gate-inp" id="kip" type="password" placeholder="sk-ant-api03-..." autocomplete="off" onkeydown="if(event.key==='Enter')saveKey()">
     <div class="gate-err" id="kerr">Key must start with sk-ant-</div>
-    <div class="gate-hint">Get a key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> &rarr; API Keys &rarr; Create Key. Add $5 credit. Each recap costs ~$0.02.</div>
+    <div class="gate-hint">Get a key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> &rarr; API Keys &rarr; Create Key. Add $5 credit. Each recap costs ~$0.03.</div>
     <button class="gate-btn" onclick="saveKey()">ENTER THE DAILY BALL</button>
     <div class="gate-note"><strong>Your key stays on your device.</strong><br>Saved only in your browser. Never sent anywhere except Anthropic directly.</div>
   </div>
@@ -158,7 +162,7 @@
   </div>
 
   <div class="ticker-bar">
-    <span class="ticker-inner">NBA - OKC 51-15 - SAS 48-17 - BOS upset by SAS - UCL - Real Madrid 3-0 Man City - PSG 5-2 Chelsea - Bayern 6-1 Atalanta - Atletico 5-2 Tottenham - Bodo/Glimt 3-0 Sporting - NCAAMB - Conference Tourneys - Selection Sunday Mar 15 - NFL Free Agency opens - F1 Australian GP this weekend &nbsp;&nbsp;&nbsp;</span>
+    <span class="ticker-inner" id="ticker-txt">THE DAILY BALL &nbsp;&#9679;&nbsp; LIVE SPORTS INTELLIGENCE &nbsp;&#9679;&nbsp; HIT GENERATE TO LOAD TODAY'S SCORES</span>
   </div>
 
   <div class="key-bar">
@@ -203,235 +207,312 @@
 </div>
 
 <script>
-// ── KEY ──────────────────────────────────────────────────────────────────────
+var PROXY = 'https://daily-ball-proxy.amirgelman.workers.dev';
+
+// ── KEY ───────────────────────────────────────────────────────────────────────
 var KS = 'tdb_key';
-function getKey(){ return localStorage.getItem(KS)||''; }
+function getKey(){ return localStorage.getItem(KS) || ''; }
 function saveKey(){
-  var v=document.getElementById('kip').value.trim();
-  if(!v.startsWith('sk-ant-')){ document.getElementById('kip').classList.add('err'); document.getElementById('kerr').classList.add('show'); return; }
+  var v = document.getElementById('kip').value.trim();
+  if (!v.startsWith('sk-ant-')){ document.getElementById('kip').classList.add('err'); document.getElementById('kerr').classList.add('show'); return; }
   document.getElementById('kip').classList.remove('err'); document.getElementById('kerr').classList.remove('show');
-  localStorage.setItem(KS,v); showApp();
+  localStorage.setItem(KS, v); showApp();
 }
 function changeKey(){ localStorage.removeItem(KS); document.getElementById('kip').value=''; document.getElementById('gate').style.display='flex'; document.getElementById('app').style.display='none'; }
 function showApp(){
   document.getElementById('gate').style.display='none'; document.getElementById('app').style.display='block';
-  var k=getKey(); document.getElementById('key-txt').textContent='API key active - '+k.slice(0,10)+'........'+k.slice(-4);
+  var k = getKey(); document.getElementById('key-txt').textContent = 'API key active - ' + k.slice(0,10) + '........' + k.slice(-4);
 }
-window.addEventListener('DOMContentLoaded',function(){ if(getKey()) showApp(); });
+window.addEventListener('DOMContentLoaded', function(){ if (getKey()) showApp(); });
 
-// ── DATE ─────────────────────────────────────────────────────────────────────
-var today=new Date();
-document.getElementById('dpick').value=today.toISOString().split('T')[0];
-document.getElementById('today-lbl').textContent=today.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+// ── DATE ──────────────────────────────────────────────────────────────────────
+var today = new Date();
+document.getElementById('dpick').value = today.toISOString().split('T')[0];
+document.getElementById('today-lbl').textContent = today.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
 
 // ── LEAGUES ───────────────────────────────────────────────────────────────────
-var LL=[
-  {id:'nba',name:'NBA',em:'🏀',sp:'BASKETBALL',on:true},
-  {id:'ncaamb',name:'College Basketball',em:'🏀',sp:'BASKETBALL',on:true},
-  {id:'euroleague',name:'EuroLeague',em:'🏀',sp:'BASKETBALL',on:true},
-  {id:'il_bball',name:'Israeli Basketball',em:'🏀',sp:'BASKETBALL',on:false},
-  {id:'fiba',name:'FIBA / MondoBaskt',em:'🏀',sp:'BASKETBALL',on:false},
-  {id:'epl',name:'EPL',em:'⚽',sp:'SOCCER',on:true},
-  {id:'ucl',name:'UEFA Champions League',em:'⚽',sp:'SOCCER',on:true},
-  {id:'laliga',name:'La Liga',em:'⚽',sp:'SOCCER',on:false},
-  {id:'wc_qual',name:'World Cup Qualifiers',em:'⚽',sp:'SOCCER',on:true},
-  {id:'euro_qual',name:'Euro Qualifiers',em:'⚽',sp:'SOCCER',on:true},
-  {id:'il_soccer',name:'Israeli Soccer',em:'⚽',sp:'SOCCER',on:false},
-  {id:'mls',name:'MLS',em:'⚽',sp:'SOCCER',on:false},
-  {id:'nfl',name:'NFL',em:'🏈',sp:'AM. FOOTBALL',on:true},
-  {id:'ncaafb',name:'College Football',em:'🏈',sp:'AM. FOOTBALL',on:true},
-  {id:'mlb',name:'MLB',em:'⚾',sp:'BASEBALL',on:false},
-  {id:'nhl',name:'NHL',em:'🏒',sp:'HOCKEY',on:false},
-  {id:'f1',name:'Formula 1',em:'🏎',sp:'RACING',on:true},
-  {id:'tennis',name:'Tennis',em:'🎾',sp:'OTHER',on:false},
-  {id:'golf',name:'Golf / PGA',em:'⛳',sp:'OTHER',on:false},
-  {id:'ufc',name:'UFC / MMA',em:'🥊',sp:'OTHER',on:false}
+var LL = [
+  {id:'nba',       name:'NBA',                   em:'🏀', sp:'BASKETBALL',   on:true},
+  {id:'ncaamb',    name:'College Basketball',    em:'🏀', sp:'BASKETBALL',   on:true},
+  {id:'epl',       name:'EPL',                   em:'⚽', sp:'SOCCER',       on:true},
+  {id:'ucl',       name:'UEFA Champions League', em:'⚽', sp:'SOCCER',       on:true},
+  {id:'laliga',    name:'La Liga',               em:'⚽', sp:'SOCCER',       on:false},
+  {id:'mls',       name:'MLS',                   em:'⚽', sp:'SOCCER',       on:false},
+  {id:'wc_qual',   name:'World Cup Qualifiers',  em:'⚽', sp:'SOCCER',       on:true},
+  {id:'euro_qual', name:'Euro Qualifiers',       em:'⚽', sp:'SOCCER',       on:true},
+  {id:'nfl',       name:'NFL',                   em:'🏈', sp:'AM. FOOTBALL', on:true},
+  {id:'ncaafb',    name:'College Football',      em:'🏈', sp:'AM. FOOTBALL', on:true},
+  {id:'mlb',       name:'MLB',                   em:'⚾', sp:'BASEBALL',     on:false},
+  {id:'nhl',       name:'NHL',                   em:'🏒', sp:'HOCKEY',       on:false},
+  {id:'f1',        name:'Formula 1',             em:'🏎', sp:'RACING',       on:true},
+  {id:'tennis',    name:'Tennis',                em:'🎾', sp:'OTHER',        on:false},
+  {id:'golf',      name:'Golf / PGA',            em:'⛳', sp:'OTHER',        on:false},
+  {id:'ufc',       name:'UFC / MMA',             em:'🥊', sp:'OTHER',        on:false}
 ];
-var AC={};
-LL.forEach(function(l){AC[l.id]=l.on;});
+var AC = {};
+LL.forEach(function(l){ AC[l.id] = l.on; });
+
+var COLORS = {
+  'NBA':'red','College Basketball':'purple','EPL':'green','UEFA Champions League':'blue',
+  'La Liga':'blue','MLS':'green','World Cup Qualifiers':'green','Euro Qualifiers':'green',
+  'NFL':'blue','College Football':'green','MLB':'red','NHL':'blue',
+  'Formula 1':'red','Tennis':'green','Golf / PGA':'green','UFC / MMA':'red'
+};
 
 function buildSel(){
-  var c=document.getElementById('sgroups'), sports=[];
-  LL.forEach(function(l){if(sports.indexOf(l.sp)===-1)sports.push(l.sp);});
-  c.innerHTML=sports.map(function(s){
-    var g=LL.filter(function(l){return l.sp===s;});
+  var c = document.getElementById('sgroups'), sports = [];
+  LL.forEach(function(l){ if (sports.indexOf(l.sp) === -1) sports.push(l.sp); });
+  c.innerHTML = sports.map(function(s){
+    var g = LL.filter(function(l){ return l.sp === s; });
     return '<div class="sgroup"><div class="slbl">'+s+'</div><div class="chips">'+
-      g.map(function(l){return '<div class="chip'+(AC[l.id]?' on':'')+'" id="ch-'+l.id+'" onclick="tog(\''+l.id+'\')"><span class="pip"></span>'+l.em+' '+l.name+'</div>';}).join('')+
+      g.map(function(l){ return '<div class="chip'+(AC[l.id]?' on':'')+'" id="ch-'+l.id+'" onclick="tog(\''+l.id+'\')"><span class="pip"></span>'+l.em+' '+l.name+'</div>'; }).join('')+
       '</div></div>';
   }).join('');
   upd();
 }
-function tog(id){ AC[id]=!AC[id]; var c=document.getElementById('ch-'+id); if(c)c.className='chip'+(AC[id]?' on':''); upd(); }
-function upd(){ document.getElementById('bdg').textContent=Object.values(AC).filter(Boolean).length; }
-function rch(id){ var c=document.getElementById('ch-'+id); if(c)c.className='chip'+(AC[id]?' on':''); }
-function selAll(){ LL.forEach(function(l){AC[l.id]=true;rch(l.id);}); upd(); }
-function selNone(){ LL.forEach(function(l){AC[l.id]=false;rch(l.id);}); upd(); }
-function selDef(){ LL.forEach(function(l){AC[l.id]=l.on;rch(l.id);}); upd(); }
+function tog(id){ AC[id]=!AC[id]; var c=document.getElementById('ch-'+id); if(c) c.className='chip'+(AC[id]?' on':''); upd(); }
+function upd(){ document.getElementById('bdg').textContent = Object.values(AC).filter(Boolean).length; }
+function rch(id){ var c=document.getElementById('ch-'+id); if(c) c.className='chip'+(AC[id]?' on':''); }
+function selAll(){ LL.forEach(function(l){ AC[l.id]=true; rch(l.id); }); upd(); }
+function selNone(){ LL.forEach(function(l){ AC[l.id]=false; rch(l.id); }); upd(); }
+function selDef(){ LL.forEach(function(l){ AC[l.id]=l.on; rch(l.id); }); upd(); }
 function toggleSel(){ var p=document.getElementById('selPanel'),b=document.getElementById('selBtn'),o=p.classList.toggle('open'); b.classList.toggle('open',o); }
 buildSel();
 
-var COLORS={
-  'NBA':'red','College Basketball':'purple','EuroLeague':'orange','Israeli Basketball':'blue','FIBA / MondoBaskt':'orange',
-  'EPL':'green','UEFA Champions League':'blue','La Liga':'blue','World Cup Qualifiers':'green','Euro Qualifiers':'green','Israeli Soccer':'blue','MLS':'green',
-  'NFL':'blue','College Football':'green','MLB':'red','NHL':'blue','Formula 1':'red','Tennis':'green','Golf / PGA':'green','UFC / MMA':'red'
-};
-
 // ── GENERATE ──────────────────────────────────────────────────────────────────
+function setStep(msg){ var el=document.getElementById('pstep'); if(el) el.textContent=msg; }
+
 async function generate(){
-  var key=getKey(); if(!key){changeKey();return;}
+  var key = getKey();
+  if (!key){ changeKey(); return; }
+
   var btn=document.getElementById('genbtn'), lbl=document.getElementById('genlbl');
   var idle=document.getElementById('idle'), out=document.getElementById('out');
   var dv=document.getElementById('dpick').value;
 
   document.getElementById('selPanel').classList.remove('open');
   document.getElementById('selBtn').classList.remove('open');
-
-  btn.classList.add('loading'); btn.disabled=true; lbl.textContent='SCANNING FEEDS...';
+  btn.classList.add('loading'); btn.disabled=true;
   idle.style.display='none'; out.style.display='block';
-  out.innerHTML='<div class="spinner-wrap"><div class="pulse">COMPILING BRIEF</div><div class="pulse-sub">Scanning leagues &middot; Filtering noise &middot; Building your recap</div></div>';
 
-  var fd=new Date(dv+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  var sel=LL.filter(function(l){return AC[l.id];}).map(function(l){return l.name;}).join(', ');
+  var fd = new Date(dv+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var selectedIds   = LL.filter(function(l){ return AC[l.id]; }).map(function(l){ return l.id; });
+  var selectedNames = LL.filter(function(l){ return AC[l.id]; }).map(function(l){ return l.name; });
 
-  var prompt =
-    'TODAY: '+fd+'. You are the editor-in-chief of The Daily Ball, a sharp daily sports brief.\n'+
-    'SELECTED LEAGUES: '+sel+'\n\n'+
-
-    'STEP 1 - SEARCH THE WEB FIRST.\n'+
-    'For each selected league, search the web RIGHT NOW to get todays actual scores, results, standings, and news.\n'+
-    'Search queries to run: "[league] scores '+fd+'", "[league] results today", "[league] standings", "[league] news today".\n'+
-    'ONLY use facts from your search results. Never use training data for scores or player stats. If you cannot find real data for a league, skip it.\n\n'+
-
-    'STEP 2 - APPLY THE EDITORIAL FILTER.\n'+
-    'Only publish a league card if it has genuine news from the last 24-48 hours. No games played + no real news = skip the league entirely. Be ruthless.\n\n'+
-
-    'STEP 3 - WRITE THE BRIEF. Each league card has 4 bullets + 3 highlights. STRICT RULES:\n'+
-    '[SCORES] - 1 sentence max. Scores and upset results only. Nothing else.\n'+
-    '[PERF] - 1 sentence max. One specific player, one specific stat or moment. Must be different info from SCORES.\n'+
-    '[STAND] - 1 sentence max. Table/standings impact only - who moved, who is in danger. No scores, no player names repeated from above.\n'+
-    '[NEWS] - 1 sentence max. Injuries, trades, suspensions, or streaks. Must be completely new info not mentioned in any other bullet.\n'+
-    '[WATCH1] [WATCH2] [WATCH3] - The 3 most exciting moments from today to watch. Each gets a short punchy label and a YouTube search URL.\n\n'+
-
-    'WRITING RULES: Each bullet must contain different information - a journalist never repeats the same story twice. Max 20 words per bullet. Direct and confident. No "it is worth noting", no filler.\n\n'+
-
-    'OUTPUT - use exactly these tags and nothing else:\n\n'+
-    '[LEAGUE]League Name[/LEAGUE]\n'+
-    '[SCORES]one sentence[/SCORES]\n'+
-    '[PERF]one sentence[/PERF]\n'+
-    '[STAND]one sentence[/STAND]\n'+
-    '[NEWS]one sentence[/NEWS]\n'+
-    '[WATCH1]Punchy label|https://www.youtube.com/results?search_query=specific+keywords[/WATCH1]\n'+
-    '[WATCH2]Punchy label|https://www.youtube.com/results?search_query=specific+keywords[/WATCH2]\n'+
-    '[WATCH3]Punchy label|https://www.youtube.com/results?search_query=specific+keywords[/WATCH3]\n\n'+
-    '...one block per qualifying league...\n\n'+
-    '[WATERCOOLER]\n'+
-    '[B1]One sharp sentence about a sport outside the selected list[/B1]\n'+
-    '[B2]One sharp sentence[/B2]\n'+
-    '[B3]One sharp sentence[/B3]\n'+
-    '[B4]One sharp sentence[/B4]\n'+
-    '[B5]One sharp sentence[/B5]\n'+
-    '[WATCH1]Punchy label|https://www.youtube.com/results?search_query=keywords[/WATCH1]\n'+
-    '[WATCH2]Punchy label|https://www.youtube.com/results?search_query=keywords[/WATCH2]\n'+
-    '[WATCH3]Punchy label|https://www.youtube.com/results?search_query=keywords[/WATCH3]\n'+
-    '[/WATERCOOLER]';
+  out.innerHTML = '<div class="loading-wrap"><div class="pulse" id="ptxt">FETCHING LIVE DATA</div><div class="pulse-sub">Pulling scores from ESPN</div><div class="pulse-step" id="pstep">Connecting...</div></div>';
 
   try {
-    var res=await fetch('https://daily-ball-proxy.amirgelman.workers.dev',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-beta':'web-search-2025-03-05'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:8000,messages:[{role:'user',content:prompt}],tools:[{type:'web_search_20250305',name:'web_search'}]})
-    });
-    if(res.status===401) throw new Error('Invalid API key - click change key.');
-    if(!res.ok) throw new Error('API error '+res.status);
+    // ── Step 1: ESPN ─────────────────────────────────────────────────────────
+    lbl.textContent = 'FETCHING LIVE DATA...';
+    setStep('Fetching ESPN scores...');
 
-    var data=await res.json();
-    var text=(data.content||[]).map(function(b){return b.text||'';}).join('');
-    renderText(text, fd);
+    var espnIds = selectedIds.filter(function(id){
+      return ['nba','ncaamb','nhl','mlb','nfl','ncaafb','epl','ucl','laliga','mls','wc_qual','euro_qual','f1','tennis','golf','ufc'].indexOf(id) > -1;
+    });
+
+    var espnData = {};
+    if (espnIds.length){
+      try {
+        var er = await fetch(PROXY + '/espn?leagues=' + espnIds.join(','));
+        if (er.ok) espnData = await er.json();
+      } catch(e){ console.warn('ESPN fetch failed:', e); }
+    }
+
+    // Build verified data block
+    var dataBlock = buildDataBlock(espnData, selectedIds);
+    setStep('Data loaded. Writing brief...');
+
+    // ── Step 2: Claude ────────────────────────────────────────────────────────
+    document.getElementById('ptxt').textContent = 'WRITING BRIEF';
+    document.querySelector('.pulse-sub').textContent = 'Analyzing verified data';
+    lbl.textContent = 'WRITING BRIEF...';
+
+    var prompt = buildPrompt(fd, selectedNames, dataBlock);
+
+    var cr = await fetch(PROXY + '/claude', {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json', 'x-api-key':key, 'anthropic-version':'2023-06-01' },
+      body: JSON.stringify({ model:'claude-sonnet-4-20250514', max_tokens:5000, messages:[{role:'user',content:prompt}] })
+    });
+
+    if (cr.status === 401) throw new Error('Invalid API key - click "change key".');
+    if (!cr.ok) throw new Error('Claude API error ' + cr.status);
+
+    var cd = await cr.json();
+    if (cd.error) throw new Error(cd.error.message || JSON.stringify(cd.error));
+
+    var text = (cd.content || []).map(function(b){ return b.text||''; }).join('');
+    if (!text.trim()) throw new Error('Claude returned an empty response. Check your API key has credit.');
+
+    // Update ticker
+    updateTicker(espnData, selectedIds);
+
+    renderBrief(text, fd);
 
   } catch(e){
-    out.innerHTML='<div class="errbox">Error: '+e.message+'</div>';
+    out.innerHTML = '<div class="errbox">ERROR: ' + e.message + '\n\nIf you see "Claude returned empty response", check your Anthropic account has credit at console.anthropic.com</div>';
   } finally {
-    btn.classList.remove('loading'); btn.disabled=false; lbl.textContent="GENERATE TODAY'S BRIEF";
+    btn.classList.remove('loading'); btn.disabled=false; lbl.textContent = "GENERATE TODAY'S BRIEF";
   }
 }
 
-// ── PARSE PLAIN TEXT FORMAT ───────────────────────────────────────────────────
-function tag(text, t){
-  var re=new RegExp('\\['+t+'\\]([\\s\\S]*?)\\[/'+t+'\\]','i');
-  var m=text.match(re); return m ? m[1].trim() : '';
+function buildDataBlock(espnData, selectedIds){
+  var lines = [];
+  selectedIds.forEach(function(id){
+    var league = LL.find(function(l){ return l.id===id; });
+    if (!league) return;
+    var d = espnData[id];
+    lines.push('\n=== ' + league.name.toUpperCase() + ' ===');
+    if (!d || d.error){
+      lines.push('ESPN data unavailable for this league. Use your knowledge of recent results if today is a game day, but clearly note any uncertainty.');
+    } else if (d.summary){
+      lines.push(d.summary);
+      lines.push('(Event count from ESPN: ' + (d.eventCount||0) + ')');
+    } else {
+      lines.push('No events found in ESPN data.');
+    }
+  });
+  return lines.join('\n');
 }
-function tagAll(text, t){
-  var re=new RegExp('\\['+t+'\\]([\\s\\S]*?)\\[/'+t+'\\]','gi'), out=[], m;
-  while((m=re.exec(text))!==null) out.push(m[1].trim());
-  return out;
+
+function buildPrompt(fd, selectedNames, dataBlock){
+  return 'You are the editor-in-chief of The Daily Ball for ' + fd + '.\n\n' +
+    'SELECTED LEAGUES: ' + selectedNames.join(', ') + '\n\n' +
+    'VERIFIED ESPN DATA (this is real live data - base your writing on this only):\n' +
+    dataBlock + '\n\n' +
+    'YOUR JOB:\n' +
+    'Write a sharp, no-fluff sports brief. You are a seasoned sports anchor. Every word must earn its place.\n\n' +
+    'EDITORIAL RULES:\n' +
+    '1. ONLY include a league if ESPN data shows completed or in-progress games. No games = no card. Skip it.\n' +
+    '2. Each league card has these sections - each covers a COMPLETELY DIFFERENT angle:\n' +
+    '   [SCORES] The results only. Exact scores. Who won. Flag upsets clearly.\n' +
+    '   [NEED2KNOW] The ONE thing every fan must know today. Not the score - the story. Why does it matter? What does it mean for the season? Make this the most insightful line on the card.\n' +
+    '   [PERF] One standout player. Name + stat from ESPN data. One sentence only.\n' +
+    '   [STAND] Standings shake-up only. Who climbed, who fell, what race just got interesting.\n' +
+    '   [NEWS] Injury, trade, streak, or context NOT already said above.\n' +
+    '3. For videos: suggest 3 specific searches. Be precise - include team names and player names.\n' +
+    '4. Water Cooler: 5 punchy bullets about other sports not in the selected leagues. Things that actually happened today if you know them, otherwise the most interesting recent news.\n\n' +
+    'OUTPUT FORMAT - use EXACTLY these tags, nothing else:\n\n' +
+    '[LEAGUE]League Name[/LEAGUE]\n' +
+    '[SCORES]...[/SCORES]\n' +
+    '[NEED2KNOW]...[/NEED2KNOW]\n' +
+    '[PERF]...[/PERF]\n' +
+    '[STAND]...[/STAND]\n' +
+    '[NEWS]...[/NEWS]\n' +
+    '[VID1]short label|youtube search terms[/VID1]\n' +
+    '[VID2]short label|youtube search terms[/VID2]\n' +
+    '[VID3]short label|youtube search terms[/VID3]\n\n' +
+    '...repeat block for each league with games today...\n\n' +
+    '[WATERCOOLER]\n' +
+    '[B1]one punchy sentence[/B1]\n' +
+    '[B2]one punchy sentence[/B2]\n' +
+    '[B3]one punchy sentence[/B3]\n' +
+    '[B4]one punchy sentence[/B4]\n' +
+    '[B5]one punchy sentence[/B5]\n' +
+    '[VID1]short label|youtube search terms[/VID1]\n' +
+    '[VID2]short label|youtube search terms[/VID2]\n' +
+    '[/WATERCOOLER]';
 }
 
-function renderText(text, fd){
-  var out=document.getElementById('out');
-  var html='<div class="dheader">DAILY BRIEF - '+fd+'</div><div class="grid">';
+function updateTicker(espnData, selectedIds){
+  var items = [];
+  selectedIds.forEach(function(id){
+    var d = espnData[id];
+    if (!d || !d.summary) return;
+    var league = LL.find(function(l){ return l.id===id; });
+    // Extract GAME lines from summary
+    var lines = d.summary.split('\n');
+    lines.forEach(function(line){
+      if (line.startsWith('GAME:')) {
+        var clean = line.replace('GAME:','').replace(/\|.*/,'').trim();
+        items.push((league?league.name:'') + ': ' + clean);
+      }
+    });
+  });
+  if (items.length){
+    document.getElementById('ticker-txt').textContent = items.join('  \u2022  ') + '   ';
+  }
+}
 
-  // Find all league blocks
-  var leagueRe=/\[LEAGUE\]([\s\S]*?)\[\/LEAGUE\]([\s\S]*?)(?=\[LEAGUE\]|\[WATERCOOLER\]|$)/gi;
-  var m;
-  while((m=leagueRe.exec(text))!==null){
-    var lname=m[1].trim();
-    var block=m[2];
-    var color=COLORS[lname]||'';
-    var meta=LL.find(function(l){return l.name===lname;});
-    var em=meta?meta.em:'🏅';
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function getTag(text, t){
+  var re = new RegExp('\\['+t+'\\]([\\s\\S]*?)\\[/'+t+'\\]','i');
+  var m = text.match(re); return m ? m[1].trim() : '';
+}
 
-    var scores=tag(block,'SCORES');
-    var perf=tag(block,'PERF');
-    var stand=tag(block,'STAND');
-    var news=tag(block,'NEWS');
-    var w1=tag(block,'WATCH1'), w2=tag(block,'WATCH2'), w3=tag(block,'WATCH3');
-    // fallback for old single WATCH tag
-    if(!w1){ var wf=tag(block,'WATCH'); w1=wf; }
+function renderBrief(text, fd){
+  var out = document.getElementById('out');
+  var html = '<div class="dheader">DAILY BRIEF - '+fd+'</div><div class="grid">';
 
-    html+='<div class="card"><div class="chead '+color+'"><div class="cname">'+lname+'</div><div style="font-size:18px">'+em+'</div></div><div class="cbody">';
-    if(scores) html+=row('sc','🎯','SCORES',scores);
-    if(perf)   html+=row('pf','⚡','PERFORMANCE',perf);
-    if(stand)  html+=row('st','📊','STANDINGS',stand);
-    if(news)   html+=row('nw','📰','NEWS',news);
-    var watches=[w1,w2,w3].filter(Boolean);
-    if(watches.length) html+=watchRows(watches);
-    html+='</div></div>';
+  var leagueRe = /\[LEAGUE\]([\s\S]*?)\[\/LEAGUE\]([\s\S]*?)(?=\[LEAGUE\]|\[WATERCOOLER\]|$)/gi;
+  var m, count = 0;
+  while ((m = leagueRe.exec(text)) !== null){
+    var lname = m[1].trim(), block = m[2];
+    var color = COLORS[lname] || '';
+    var meta = LL.find(function(l){ return l.name===lname; });
+    var em = meta ? meta.em : '🏅';
+
+    var scores    = getTag(block, 'SCORES');
+    var need2know = getTag(block, 'NEED2KNOW');
+    var perf      = getTag(block, 'PERF');
+    var stand     = getTag(block, 'STAND');
+    var news      = getTag(block, 'NEWS');
+    var v1 = getTag(block,'VID1'), v2 = getTag(block,'VID2'), v3 = getTag(block,'VID3');
+
+    if (!scores && !need2know) continue; // skip empty cards
+    count++;
+
+    html += '<div class="card"><div class="chead '+color+'"><div class="cname">'+lname+'</div><div style="font-size:18px">'+em+'</div></div><div class="cbody">';
+    if (scores)    html += brow('sc','🎯','SCORES', scores);
+    if (need2know) html += brow('nk','⚡','WHAT YOU NEED TO KNOW', need2know);
+    if (perf)      html += brow('pf','🌟','PERFORMANCE', perf);
+    if (stand)     html += brow('st','📊','STANDINGS', stand);
+    if (news)      html += brow('nw','📰','NEWS', news);
+    var vids = [v1,v2,v3].filter(Boolean);
+    if (vids.length) html += vidBlock(vids);
+    html += '</div></div>';
+  }
+
+  if (count === 0){
+    html += '<div class="errbox">No league cards generated. This usually means ESPN returned no completed games for today. Try yesterday\'s date, or check that your leagues have games today.</div>';
   }
 
   // Water cooler
-  var wcBlock=tag(text,'WATERCOOLER');
-  if(wcBlock){
-    var b1=tag(wcBlock,'B1'), b2=tag(wcBlock,'B2'), b3=tag(wcBlock,'B3'), b4=tag(wcBlock,'B4'), b5=tag(wcBlock,'B5');
-    var wcWatch=tag(wcBlock,'WATCH');
-    var wcp=wcWatch.split('|');
-    html+='<div class="card wide"><div class="chead teal"><div class="cname">🌊 THE WATER COOLER</div><div style="font-size:11px;font-family:Barlow Condensed,sans-serif;font-weight:700;letter-spacing:1px">OTHER LEAGUES - MUST KNOW</div></div><div class="cbody">';
-    var icons=['🏒','⚾','🎾','⛳','🥊'];
-    [b1,b2,b3,b4,b5].forEach(function(b,i){ if(b) html+=row('nw',icons[i],'BULLETIN '+(i+1),b); });
-    var wcWatches=[];
-    var ww1=tag(wcBlock,'WATCH1'),ww2=tag(wcBlock,'WATCH2'),ww3=tag(wcBlock,'WATCH3');
-    if(!ww1){var wwf=tag(wcBlock,'WATCH'); ww1=wwf;}
-    [ww1,ww2,ww3].forEach(function(w){if(w)wcWatches.push(w);});
-    if(wcWatches.length) html+=watchRows(wcWatches);
-    html+='</div></div>';
+  var wcBlock = getTag(text, 'WATERCOOLER');
+  if (wcBlock){
+    var bs = [getTag(wcBlock,'B1'),getTag(wcBlock,'B2'),getTag(wcBlock,'B3'),getTag(wcBlock,'B4'),getTag(wcBlock,'B5')].filter(Boolean);
+    var wv1=getTag(wcBlock,'VID1'), wv2=getTag(wcBlock,'VID2');
+    if (bs.length){
+      html += '<div class="card wide"><div class="chead teal"><div class="cname">🌊 THE WATER COOLER</div><div style="font-size:11px;font-family:Barlow Condensed,sans-serif;font-weight:700;letter-spacing:1px">AROUND THE SPORTS WORLD</div></div><div class="cbody">';
+      var icons = ['🏒','⚾','🎾','⛳','🥊'];
+      bs.forEach(function(b,i){ html += brow('nw', icons[i]||'📌', 'BULLETIN '+(i+1), b); });
+      var wcVids = [wv1,wv2].filter(Boolean);
+      if (wcVids.length) html += vidBlock(wcVids);
+      html += '</div></div>';
+    }
   }
 
-  html+='</div>';
-  out.innerHTML=html;
+  html += '</div>';
+  out.innerHTML = html;
 }
 
-function row(cls,ico,lbl,txt){
+function brow(cls, ico, lbl, txt){
   return '<div class="brow"><div class="bico '+cls+'">'+ico+'</div><div class="btxt"><span class="blbl">'+lbl+'</span>'+txt+'</div></div>';
 }
-function watchRows(watches){
-  if(!watches.length) return '';
-  var label = watches.length===1 ? 'THE ONE PLAY YOU NEED TO WATCH' : 'MUST-WATCH HIGHLIGHTS';
-  var links = watches.map(function(w,i){
-    var parts=w.split('|');
-    var desc=parts[0]||'Watch highlight '+(i+1);
-    var url=(parts[1]||'https://www.youtube.com/results?search_query=sports+highlights').trim();
-    return '<a href="'+url+'" target="_blank" rel="noopener" class="wbtn yt" style="display:block;margin-bottom:4px">&#9654; '+desc+'</a>';
+
+function vidBlock(vids){
+  var links = vids.map(function(v){
+    var parts = v.split('|');
+    var label = (parts[0]||'Highlight').trim();
+    var query = (parts[1]||label).trim();
+    var ytUrl = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(query);
+    var xUrl  = 'https://x.com/search?q=' + encodeURIComponent(query) + '&f=video';
+    return '<div class="vrow">'+
+      '<a href="'+ytUrl+'" target="_blank" rel="noopener" class="wbtn yt">&#9654; '+label+'</a>'+
+      '<a href="'+xUrl+'"  target="_blank" rel="noopener" class="wbtn xb">&#120143; on X</a>'+
+      '</div>';
   }).join('');
-  return '<div class="brow"><div class="bico wt">🎬</div><div class="btxt"><span class="blbl">'+label+'</span>'+links+'</div></div>';
+  return '<div class="brow"><div class="bico wt">🎬</div><div class="btxt"><span class="blbl">WATCH</span><div class="vlinks">'+links+'</div></div></div>';
 }
 </script>
 </body>
