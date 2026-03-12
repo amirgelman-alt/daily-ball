@@ -313,7 +313,7 @@ async function generate(){
     var espnData = {};
     if (espnIds.length){
       try {
-        var er = await fetch(PROXY + '/espn?leagues=' + espnIds.join(','));
+        var er = await fetch(PROXY + '/espn?leagues=' + espnIds.join(',') + '&ts=' + Date.now());
         if (er.ok) espnData = await er.json();
       } catch(e){ console.warn('ESPN fetch failed:', e); }
     }
@@ -376,41 +376,46 @@ function buildDataBlock(espnData, selectedIds){
 }
 
 function buildPrompt(fd, selectedNames, dataBlock){
-  return 'You are the editor-in-chief of The Daily Ball for ' + fd + '.\n\n' +
-    'SELECTED LEAGUES: ' + selectedNames.join(', ') + '\n\n' +
-    'VERIFIED ESPN DATA (this is real live data - base your writing on this only):\n' +
-    dataBlock + '\n\n' +
-    'YOUR JOB:\n' +
-    'Write a sharp, no-fluff sports brief. You are a seasoned sports anchor. Every word must earn its place.\n\n' +
-    'EDITORIAL RULES:\n' +
-    '1. ONLY include a league if ESPN data shows completed or in-progress games. No games = no card. Skip it.\n' +
-    '2. Each league card has these sections - each covers a COMPLETELY DIFFERENT angle:\n' +
-    '   [SCORES] The results only. Exact scores. Who won. Flag upsets clearly.\n' +
-    '   [NEED2KNOW] The ONE thing every fan must know today. Not the score - the story. Why does it matter? What does it mean for the season? Make this the most insightful line on the card.\n' +
-    '   [PERF] One standout player. Name + stat from ESPN data. One sentence only.\n' +
-    '   [STAND] Standings shake-up only. Who climbed, who fell, what race just got interesting.\n' +
-    '   [NEWS] Injury, trade, streak, or context NOT already said above.\n' +
-    '3. For videos: suggest 3 specific searches. Be precise - include team names and player names.\n' +
-    '4. Water Cooler: 5 punchy bullets about other sports not in the selected leagues. Things that actually happened today if you know them, otherwise the most interesting recent news.\n\n' +
-    'OUTPUT FORMAT - use EXACTLY these tags, nothing else:\n\n' +
-    '[LEAGUE]League Name[/LEAGUE]\n' +
-    '[SCORES]...[/SCORES]\n' +
-    '[NEED2KNOW]...[/NEED2KNOW]\n' +
-    '[PERF]...[/PERF]\n' +
-    '[STAND]...[/STAND]\n' +
-    '[NEWS]...[/NEWS]\n' +
-    '[VID1]short label|youtube search terms[/VID1]\n' +
-    '[VID2]short label|youtube search terms[/VID2]\n' +
-    '[VID3]short label|youtube search terms[/VID3]\n\n' +
-    '...repeat block for each league with games today...\n\n' +
-    '[WATERCOOLER]\n' +
-    '[B1]one punchy sentence[/B1]\n' +
-    '[B2]one punchy sentence[/B2]\n' +
-    '[B3]one punchy sentence[/B3]\n' +
-    '[B4]one punchy sentence[/B4]\n' +
-    '[B5]one punchy sentence[/B5]\n' +
-    '[VID1]short label|youtube search terms[/VID1]\n' +
-    '[VID2]short label|youtube search terms[/VID2]\n' +
+  var now = new Date();
+  var timeStr = now.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit', timeZoneName:'short'});
+  return 'You are the editor-in-chief of The Daily Ball. It is currently ' + timeStr + ' on ' + fd + '.\n\n'+
+    'SELECTED LEAGUES: ' + selectedNames.join(', ') + '\n\n'+
+    'VERIFIED ESPN DATA - last 24 hours (fetched live right now from ESPN):\n'+
+    dataBlock + '\n\n'+
+    'YOUR JOB:\n'+
+    'You just got handed the raw wire data. You have 10 minutes to file a brief that lands in 100,000 inboxes.\n'+
+    'Write like a seasoned sports journalist: confident, direct, no wasted words. Lead with what matters.\n'+
+    'The reader already saw the score on their phone. They come to you for the WHY and the SO WHAT.\n\n'+
+    'RULES:\n'+
+    '1. Only include a league if ESPN shows completed or live games in the last 24 hours. Zero games = skip it entirely.\n'+
+    '2. Cover ONLY events that happened in the last 24 hours from right now. Do not reach back further.\n'+
+    '3. Each league card has these sections - each one a DIFFERENT angle, zero repetition:\n'+
+    '   [SCORES] Raw results. Exact scores. Flag upsets with a word like UPSET or SHOCK. One sentence per game max.\n'+
+    '   [NEED2KNOW] The single most important story of the last 24 hours for this league. Not the score - the narrative. Why does it matter? What changed? What does a fan absolutely need to understand today? This is your lede. Make it count.\n'+
+    '   [PERF] One player who stood out. Name + specific stat from ESPN data. Nothing invented. One sentence.\n'+
+    '   [STAND] Table/standings shift only. Who moved, who leads now, what race just got interesting or is over.\n'+
+    '   [NEWS] One injury, trade, milestone, or off-field development not already covered above. If nothing new, skip this tag.\n'+
+    '4. Videos: 3 specific searches that will surface the best clips from the last 24 hours. Use real team names, player names, and dates.\n'+
+    '5. Water Cooler: 5 punchy one-liners from sports outside the selected leagues. Real news from the last 24h if you know it.\n\n'+
+    'OUTPUT - use EXACTLY these tags, no other text before or between them:\n\n'+
+    '[LEAGUE]League Name[/LEAGUE]\n'+
+    '[SCORES]...[/SCORES]\n'+
+    '[NEED2KNOW]...[/NEED2KNOW]\n'+
+    '[PERF]...[/PERF]\n'+
+    '[STAND]...[/STAND]\n'+
+    '[NEWS]...[/NEWS]\n'+
+    '[VID1]short label|youtube search terms[/VID1]\n'+
+    '[VID2]short label|youtube search terms[/VID2]\n'+
+    '[VID3]short label|youtube search terms[/VID3]\n\n'+
+    '...repeat for each league with games in the last 24h...\n\n'+
+    '[WATERCOOLER]\n'+
+    '[B1]one punchy sentence[/B1]\n'+
+    '[B2]one punchy sentence[/B2]\n'+
+    '[B3]one punchy sentence[/B3]\n'+
+    '[B4]one punchy sentence[/B4]\n'+
+    '[B5]one punchy sentence[/B5]\n'+
+    '[VID1]short label|youtube search terms[/VID1]\n'+
+    '[VID2]short label|youtube search terms[/VID2]\n'+
     '[/WATERCOOLER]';
 }
 
